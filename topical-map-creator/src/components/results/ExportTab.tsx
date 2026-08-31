@@ -3,11 +3,13 @@
 import { useState } from 'react';
 import { EngineResult } from '@/lib/engine/types';
 import { generateTopicsCSV } from '@/lib/services/export';
-import { Download, Lock, CheckCircle, Sparkles } from 'lucide-react';
+import { Download, Lock, CheckCircle, Sparkles, Printer } from 'lucide-react';
 import { Button } from '../ui/button';
+import { PdfReportView } from './PdfReportView';
 
 export function ExportTab({ result, isPaid = false }: { result: EngineResult; isPaid?: boolean }) {
   const [showUpgradeModal, setShowUpgradeModal] = useState(false);
+  const [showPdfModal, setShowPdfModal] = useState(false);
 
   const handleDownloadCSV = () => {
     if (!isPaid) {
@@ -23,6 +25,14 @@ export function ExportTab({ result, isPaid = false }: { result: EngineResult; is
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
+  };
+
+  const handleDownloadPDF = () => {
+    if (!isPaid) {
+      setShowUpgradeModal(true);
+      return;
+    }
+    setShowPdfModal(true);
   };
 
   return (
@@ -76,13 +86,18 @@ export function ExportTab({ result, isPaid = false }: { result: EngineResult; is
             </p>
           </div>
           <div className="mt-6">
-            <Button onClick={() => setShowUpgradeModal(true)} variant="outline" className="w-full justify-center space-x-2">
+            <Button onClick={handleDownloadPDF} variant="outline" className="w-full justify-center space-x-2">
               {!isPaid && <Lock className="h-3.5 w-3.5 text-amber-400" />}
               <span>Download PDF Summary</span>
             </Button>
           </div>
         </div>
       </div>
+
+      {/* Printable Executive PDF Report Modal */}
+      {showPdfModal && (
+        <PdfReportView result={result} onClose={() => setShowPdfModal(false)} />
+      )}
 
       {/* Upgrade Checkout Modal */}
       {showUpgradeModal && (

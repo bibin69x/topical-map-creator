@@ -74,8 +74,15 @@ export default function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="mt-auto border-t border-slate-800 py-6 text-center text-xs text-slate-500">
-        Topical Authority Creator MVP © 2026. Built with Next.js, Supabase, & DataForSEO.
+      <footer className="mt-auto border-t border-slate-800 py-8 text-center text-xs text-slate-500 space-y-3">
+        <div className="flex flex-wrap justify-center items-center gap-6 text-slate-400">
+          <Link href="/privacy" className="hover:text-slate-200 transition-colors">Privacy Policy</Link>
+          <span>•</span>
+          <Link href="/terms" className="hover:text-slate-200 transition-colors">Terms of Service</Link>
+          <span>•</span>
+          <Link href="/refund" className="hover:text-slate-200 transition-colors">Refund Policy</Link>
+        </div>
+        <p>Topical Authority Creator MVP © 2026. Built with Next.js, Supabase, & DataForSEO.</p>
       </footer>
     </div>
   );

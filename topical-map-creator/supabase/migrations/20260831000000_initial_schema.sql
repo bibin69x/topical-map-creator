@@ -258,3 +258,26 @@ BEGIN
   END IF;
 END;
 $$ LANGUAGE plpgsql SECURITY DEFINER;
+
+-- Cascade Account Deletion & Tax Audit Anonymization (§DOC-16)
+CREATE OR REPLACE FUNCTION delete_user_account_data(p_user_id UUID)
+RETURNS VOID AS $$
+BEGIN
+  -- 1. Cascade delete project entities
+  DELETE FROM projects WHERE user_id = p_user_id;
+  DELETE FROM generations WHERE user_id = p_user_id;
+  DELETE FROM entitlements WHERE user_id = p_user_id;
+  DELETE FROM legal_consents WHERE user_id = p_user_id;
+  DELETE FROM credit_transactions WHERE user_id = p_user_id;
+  DELETE FROM users_profile WHERE id = p_user_id;
+
+  -- 2. Anonymize payment logs for India GST tax retention compliance (§32)
+  UPDATE payments
+  SET user_id = NULL
+  WHERE user_id = p_user_id;
+
+  -- 3. Delete auth user record
+  DELETE FROM auth.users WHERE id = p_user_id;
+END;
+$$ LANGUAGE plpgsql SECURITY DEFINER;
+

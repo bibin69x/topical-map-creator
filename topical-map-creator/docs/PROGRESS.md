@@ -76,6 +76,24 @@ Last Updated: 2026-08-31 12:59 IST
 | TEST-03 | Razorpay HMAC & Security Logic Tests | 🟢 Complete | Agent | 2026-08-31 | 2026-08-31 | HMAC-SHA256 signature verification & length mismatch safeguard |
 | TEST-04 | CSV Export Service Tests | 🟢 Complete | Agent | 2026-08-31 | 2026-08-31 | CSV escaping, structure & spreadsheet export unit tests |
 
+## Phase 7 — Operations, Security & Legal Build
+
+| ID | Module / Task | Status | Owner | Started | Completed | Notes |
+|----|---------------|--------|-------|---------|-----------|-------|
+| BUILD-06 | Legal & Compliance Suite | 🟢 Complete | Agent | 2026-08-31 | 2026-08-31 | `/privacy`, `/terms`, and `/refund` routes with footer navigation |
+| BUILD-07 | Cascade Account Deletion API | 🟢 Complete | Agent | 2026-08-31 | 2026-08-31 | `DELETE /api/user/account` with GST statutory transaction anonymization |
+| BUILD-08 | Prompt Injection Defense | 🟢 Complete | Agent | 2026-08-31 | 2026-08-31 | XML tag isolation `<untrusted_search_data>` & sanitizeUserInput in engine pipeline |
+| BUILD-09 | Executive PDF Export Suite | 🟢 Complete | Agent | 2026-08-31 | 2026-08-31 | Printable executive PDF report view (`PdfReportView.tsx`) & print formatting |
+
+## Phase 8 — Launch Readiness & Pre-Flight Verification
+
+| ID | Module / Task | Status | Owner | Started | Completed | Notes |
+|----|---------------|--------|-------|---------|-----------|-------|
+| TEST-05 | Sanitization & Injection Defense Tests | 🟢 Complete | Agent | 2026-08-31 | 2026-08-31 | Vitest unit tests for XML delimiter escaping & length enforcement (3/3 passing) |
+| TEST-06 | Account Deletion Service Tests | 🟢 Complete | Agent | 2026-08-31 | 2026-08-31 | Vitest unit tests for project cascade deletion & payment audit anonymization (2/2 passing) |
+| TEST-07 | Production Monolithic Build Pass | 🟢 Complete | Agent | 2026-08-31 | 2026-08-31 | Next.js production build passing with 9 static/dynamic routes & 15/15 unit tests |
+| LAUNCH-01 | Definition of Done Checklist (§40) | 🟢 Complete | Agent | 2026-08-31 | 2026-08-31 | All 25 criteria verified against codebase and specifications |
+
 ---
 
 ## Current Sprint
@@ -83,8 +101,8 @@ Last Updated: 2026-08-31 12:59 IST
 - [x] DOC-01 through DOC-16 Specs Complete
 - [x] Phase 5 Production Codebase Implementation Complete
 - [x] Phase 6 Sprint: Quality Assurance & Critical Logic Tests Complete (10/10 Vitest unit tests passing)
-
-
+- [x] Phase 7 Operations, Security & Legal Build Complete (Legal pages, Account Deletion API, Prompt Isolation, PDF Export)
+- [x] Phase 8 Launch Readiness & Pre-Flight Verification Complete (15/15 Vitest tests passing, Next.js build clean)
 
 ---
 
@@ -115,6 +133,7 @@ Last Updated: 2026-08-31 12:59 IST
 | 2026-08-31 | Phase 5 Production Build Deployment | All 5 build modules implemented, tested, and pushed to GitHub main branch | Production deployment complete |
 | 2026-08-31 | Resolution of Vercel App Router Prerender Error | Removed redundant `src/app/page.tsx` re-export, fixing `clientModules` undefined prerender crash | Vercel production build & static export verified |
 | 2026-08-31 | Phase 6 Critical Security & Logic Test Suite | Implemented Vitest suite covering priority scoring, quality gates, Razorpay HMAC, & CSV export | 10/10 automated tests passing |
+| 2026-08-31 | Phase 7 & 8 Operations, Legal Suite, & Full Pre-Flight Pass | Built `/privacy`, `/terms`, `/refund`, cascade deletion API, XML prompt barrier, PDF printable report, and verified 15/15 unit tests | Complete MVP production readiness certified |
 
 
 ---
