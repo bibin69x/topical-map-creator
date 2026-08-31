@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import './globals.css';
+import { CookieConsent } from '@/components/layout/CookieConsent';
 
 export const metadata: Metadata = {
   title: 'Topical Authority Creator — Build SEO Topical Maps Without Expensive Tools',
@@ -15,6 +16,7 @@ export default function RootLayout({
     <html lang="en" className="dark">
       <body className="bg-slate-950 text-slate-100 min-h-screen flex flex-col font-sans">
         {children}
+        <CookieConsent />
       </body>
     </html>
   );
