@@ -117,6 +117,7 @@ Last Updated: 2026-08-31 12:59 IST
 | 2026-08-31 | Privacy Commitments & Cascade Account Deletion | No AI training on user data, sub-processor disclosures, PL/pgSQL deletion cascade (§32 & §33) | Legal locked in DOC-16 |
 | 2026-08-31 | Shared Engine Store Module (`store.ts`) | Extracted in-memory store to eliminate relative API route bundler resolution conflicts | Clean Next.js Webpack compilation on Vercel |
 | 2026-08-31 | Phase 5 Production Build Deployment | All 5 build modules implemented, tested, and pushed to GitHub main branch | Production deployment complete |
+| 2026-08-31 | Resolution of Vercel App Router Prerender Error | Removed redundant `src/app/page.tsx` re-export, fixing `clientModules` undefined prerender crash | Vercel production build & static export verified |
 
 ---
 
@@ -125,4 +126,6 @@ Last Updated: 2026-08-31 12:59 IST
 | Date | Blocker | Blocking | Resolution | Resolved |
 |------|---------|----------|------------|----------|
 | 2026-08-31 | API keys needed for search/SEO providers | Production live API execution | Integrated DataForSEO/OpenAI/Razorpay + smart mock fallback | 🟢 |
+| 2026-08-31 | Vercel prerender failure on `/` route | Production Vercel Deployment | Deleted duplicate `src/app/page.tsx` colliding with `(marketing)/page.tsx` | 🟢 |
+
 
