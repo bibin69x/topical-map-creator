@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { activeGenerations } from '@/lib/engine/store';
+import { getFeedbackSummary } from '@/lib/services/feedback';
 
 export const dynamic = 'force-dynamic';
 
@@ -101,6 +102,7 @@ export async function GET() {
           searchSpendPercentage: Number(((effectiveSearchSpend / effectiveTotalSpend) * 100).toFixed(1)),
           aiSpendPercentage: Number(((effectiveAiSpend / effectiveTotalSpend) * 100).toFixed(1))
         },
+        feedbackMetrics: getFeedbackSummary(),
         recentGenerations: recentLogs.length > 0 ? recentLogs : [
           {
             id: 'gen-demo-1',

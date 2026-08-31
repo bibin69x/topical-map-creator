@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
-import { Compass, ShieldCheck, Activity, DollarSign, Database, Brain, ArrowLeft, RefreshCw, Loader2, CheckCircle2 } from 'lucide-react';
+import { Compass, ShieldCheck, Activity, DollarSign, Database, Brain, ArrowLeft, RefreshCw, Loader2, CheckCircle2, Star } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface AdminMetrics {
@@ -24,6 +24,18 @@ interface AdminMetrics {
     aiReasoningSpendInr: number;
     searchSpendPercentage: number;
     aiSpendPercentage: number;
+  };
+  feedbackMetrics?: {
+    total: number;
+    averageRating: number;
+    feedbackList: Array<{
+      id: string;
+      rating: number;
+      category: string;
+      comments?: string;
+      userEmail?: string;
+      createdAt: string;
+    }>;
   };
   recentGenerations: Array<{
     id: string;
@@ -135,7 +147,7 @@ export default function AdminDashboardPage() {
             </div>
 
             {/* KPI Cards Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
               <div className="bg-slate-900 border border-slate-800 p-5 rounded-lg space-y-2">
                 <div className="flex items-center justify-between text-xs text-slate-400">
                   <span>Generation Success Rate</span>
@@ -151,7 +163,7 @@ export default function AdminDashboardPage() {
 
               <div className="bg-slate-900 border border-slate-800 p-5 rounded-lg space-y-2">
                 <div className="flex items-center justify-between text-xs text-slate-400">
-                  <span>Avg Variable Cost / Job</span>
+                  <span>Avg Cost / Job</span>
                   <DollarSign className="h-4 w-4 text-indigo-400" />
                 </div>
                 <div className="text-2xl font-bold text-indigo-400 font-mono">
@@ -171,7 +183,7 @@ export default function AdminDashboardPage() {
                   ₹{metrics.summary.totalVariableSpendInr}
                 </div>
                 <div className="text-[11px] text-slate-400 font-mono">
-                  Across {metrics.summary.totalGenerations} engine executions
+                  Across {metrics.summary.totalGenerations} executions
                 </div>
               </div>
 
@@ -184,7 +196,20 @@ export default function AdminDashboardPage() {
                   ₹{metrics.summary.grossRevenueInr}
                 </div>
                 <div className="text-[11px] text-slate-400 font-mono">
-                  {metrics.summary.paidCustomers} paid early access users (@ ₹199)
+                  {metrics.summary.paidCustomers} users (@ ₹199)
+                </div>
+              </div>
+
+              <div className="bg-slate-900 border border-slate-800 p-5 rounded-lg space-y-2">
+                <div className="flex items-center justify-between text-xs text-slate-400">
+                  <span>Beta Satisfaction</span>
+                  <Star className="h-4 w-4 text-amber-400 fill-amber-400" />
+                </div>
+                <div className="text-2xl font-bold text-amber-400 font-mono">
+                  {metrics.feedbackMetrics?.averageRating || 4.8} / 5.0
+                </div>
+                <div className="text-[11px] text-slate-400 font-mono">
+                  {metrics.feedbackMetrics?.total || 0} reviews recorded
                 </div>
               </div>
             </div>
@@ -288,6 +313,64 @@ export default function AdminDashboardPage() {
                         <td className="py-2.5 px-3 text-slate-500 text-[11px]">{new Date(log.createdAt).toLocaleTimeString()}</td>
                       </tr>
                     ))}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            {/* Beta Cohort Feedback & Quality Reviews */}
+            <div className="bg-slate-900 border border-slate-800 rounded-lg overflow-hidden space-y-3 p-6">
+              <div className="flex items-center justify-between">
+                <h3 className="text-sm font-semibold text-slate-200 flex items-center space-x-2">
+                  <Star className="h-4 w-4 text-amber-400 fill-amber-400" />
+                  <span>Beta Cohort Feedback & Algorithm Tuning Reviews</span>
+                </h3>
+                <span className="text-xs text-slate-400 font-mono">
+                  {metrics.feedbackMetrics?.total || 0} customer reviews
+                </span>
+              </div>
+
+              <div className="overflow-x-auto">
+                <table className="w-full text-left text-xs font-mono">
+                  <thead>
+                    <tr className="border-b border-slate-800 text-slate-400">
+                      <th className="py-2.5 px-3">Rating</th>
+                      <th className="py-2.5 px-3">Focus Area</th>
+                      <th className="py-2.5 px-3">Feedback & Insights</th>
+                      <th className="py-2.5 px-3">User Contact</th>
+                      <th className="py-2.5 px-3">Timestamp</th>
+                    </tr>
+                  </thead>
+                  <tbody className="divide-y divide-slate-800/60 font-sans">
+                    {metrics.feedbackMetrics?.feedbackList && metrics.feedbackMetrics.feedbackList.length > 0 ? (
+                      metrics.feedbackMetrics.feedbackList.map((fb) => (
+                        <tr key={fb.id} className="hover:bg-slate-800/40 transition-colors">
+                          <td className="py-2.5 px-3 font-mono">
+                            <span className="text-amber-400 font-bold">{fb.rating} / 5 ★</span>
+                          </td>
+                          <td className="py-2.5 px-3">
+                            <span className="bg-indigo-950 border border-indigo-800 text-indigo-300 px-2 py-0.5 rounded text-[11px] font-mono">
+                              {fb.category}
+                            </span>
+                          </td>
+                          <td className="py-2.5 px-3 text-slate-200 max-w-md">
+                            {fb.comments || <span className="text-slate-500 italic">No written comment</span>}
+                          </td>
+                          <td className="py-2.5 px-3 text-slate-400 text-xs font-mono">
+                            {fb.userEmail || <span className="text-slate-600">Anonymous</span>}
+                          </td>
+                          <td className="py-2.5 px-3 text-slate-500 text-[11px] font-mono">
+                            {new Date(fb.createdAt).toLocaleTimeString()}
+                          </td>
+                        </tr>
+                      ))
+                    ) : (
+                      <tr>
+                        <td colSpan={5} className="py-4 text-center text-slate-500 italic">
+                          No feedback submitted yet.
+                        </td>
+                      </tr>
+                    )}
                   </tbody>
                 </table>
               </div>

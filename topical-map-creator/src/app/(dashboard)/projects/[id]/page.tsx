@@ -8,6 +8,7 @@ import { ClustersTab } from '@/components/results/ClustersTab';
 import { IntentTab } from '@/components/results/IntentTab';
 import { InternalLinksTab } from '@/components/results/InternalLinksTab';
 import { ExportTab } from '@/components/results/ExportTab';
+import { FeedbackWidget } from '@/components/results/FeedbackWidget';
 import { Compass, LayoutDashboard, FileText, Layers, Target, GitCommit, Download, Loader2 } from 'lucide-react';
 import { clsx } from 'clsx';
 
@@ -128,6 +129,9 @@ export default function ResultsDashboardPage({ params }: { params: { id: string 
         {activeTab === 'links' && <InternalLinksTab links={displayResult.internalLinks} />}
         {activeTab === 'export' && <ExportTab result={displayResult} isPaid={false} />}
       </div>
+
+      {/* Beta Feedback Loop */}
+      <FeedbackWidget generationId={generationId} />
     </div>
   );
 }

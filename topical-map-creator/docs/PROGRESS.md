@@ -138,6 +138,15 @@ Last Updated: 2026-08-31 12:59 IST
 | FIX-01 | Primary Topic Input Sanitization | 🟢 Complete | Agent | 2026-08-31 | 2026-08-31 | Added `sanitizeUserInput` barrier at `TopicalAuthorityEngine.executePipeline` entrance |
 | DOC-18 | Production Deployment & Architecture Handbook | 🟢 Complete | Agent | 2026-08-31 | 2026-08-31 | Root `README.md` covering architecture, setup, testing (26 tests), Vercel build, and compliance |
 
+## Phase 14 — Beta Cohort Feedback Loop & Quality Reviews
+
+| ID | Module / Task | Status | Owner | Started | Completed | Notes |
+|----|---------------|--------|-------|---------|-----------|-------|
+| BUILD-21 | Beta Feedback Collection API | 🟢 Complete | Agent | 2026-08-31 | 2026-08-31 | `POST /api/feedback` & `GET /api/feedback` with rating 1-5, focus area, and comments |
+| BUILD-22 | Interactive Map Results Feedback Widget | 🟢 Complete | Agent | 2026-08-31 | 2026-08-31 | `FeedbackWidget.tsx` embedded in project results view with live star rating and async submission |
+| BUILD-23 | Admin Beta Cohort Telemetry | 🟢 Complete | Agent | 2026-08-31 | 2026-08-31 | 5th KPI card (Satisfaction rating) & real-time reviews table in `/admin` dashboard |
+| TEST-12 | Feedback Service & Validation Test Suite | 🟢 Complete | Agent | 2026-08-31 | 2026-08-31 | Vitest unit tests verifying rating bounds, payload validation, and summaries (3/3 passing) |
+
 ---
 
 ## Current Sprint
@@ -152,6 +161,7 @@ Last Updated: 2026-08-31 12:59 IST
 - [x] Phase 11 Authentication & User Session Suite Complete (`/login`, `/signup`, Supabase SSR clients, Navbar state, 21/21 Vitest tests passing)
 - [x] Phase 12 Reliability, Disaster Recovery & Production Hardening Complete (`DOC-17`, `GET /api/health`, `error.tsx`, 24/24 Vitest tests passing)
 - [x] Phase 13 End-to-End Engine Pipeline Integration & Documentation Complete (26/26 Vitest tests passing, root README.md)
+- [x] Phase 14 Beta Cohort Feedback Loop & Quality Reviews Complete (`/api/feedback`, `FeedbackWidget`, 29/29 Vitest tests passing)
 - [x] **100% V1 Definition of Done Certified (§40)**
 
 ---
@@ -224,6 +234,7 @@ Last Updated: 2026-08-31 12:59 IST
 | 2026-08-31 | Phase 11 Authentication & User Session Suite | Built `/login` & `/signup`, `@supabase/ssr` client/server helpers, auth API endpoints, and Navbar session switcher | Fulfills DoD §40 user registration & 1-free-credit onboarding |
 | 2026-08-31 | Phase 12 Reliability, Disaster Recovery & Production Hardening | Authored DOC-17 Backup/Recovery Spec, `GET /api/health`, global `error.tsx` & `not-found.tsx`, and certified 100% Definition of Done (§40) | Full MVP production readiness 100% certified |
 | 2026-08-31 | Phase 13 End-to-End Engine Pipeline Integration & Handbook | Built 16-stage pipeline integration test (`pipeline.test.ts`), added entrance sanitization barrier, authored root `README.md` | 26/26 tests passing, comprehensive developer/ops handbook |
+| 2026-08-31 | Phase 14 Beta Cohort Feedback Loop & Quality Reviews | Built `POST /api/feedback`, `FeedbackWidget.tsx` in results view, 5th KPI card & reviews table in `/admin`, and 3 new unit tests | 29/29 tests passing, complete beta user feedback loop active |
 
 
 ---
