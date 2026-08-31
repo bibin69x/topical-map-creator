@@ -110,6 +110,16 @@ Last Updated: 2026-08-31 12:59 IST
 | BUILD-14 | Admin Operational Dashboard UI | 🟢 Complete | Agent | 2026-08-31 | 2026-08-31 | Anti-slop `/admin` route with stat cards, budget cap monitor, and pipeline execution logs |
 | TEST-08 | Payment Checkout Test Suite | 🟢 Complete | Agent | 2026-08-31 | 2026-08-31 | Vitest tests for paise conversion, receipt formatting, and custom amounts (3/3 passing) |
 
+## Phase 11 — Authentication & User Session Suite
+
+| ID | Module / Task | Status | Owner | Started | Completed | Notes |
+|----|---------------|--------|-------|---------|-----------|-------|
+| BUILD-15 | Supabase Auth SSR Clients | 🟢 Complete | Agent | 2026-08-31 | 2026-08-31 | `@supabase/ssr` browser (`client.ts`) & server cookie client (`server.ts`) |
+| BUILD-16 | User Auth Portal UI | 🟢 Complete | Agent | 2026-08-31 | 2026-08-31 | Anti-slop `/login` and `/signup` routes with demo bypass option & free credit prompt |
+| BUILD-17 | Auth Server Action Handlers | 🟢 Complete | Agent | 2026-08-31 | 2026-08-31 | `POST /api/auth/signup`, `login`, and `logout` with 1-credit initial allocation |
+| BUILD-18 | Navbar User State & Session Switcher | 🟢 Complete | Agent | 2026-08-31 | 2026-08-31 | User session badge, sign in button, logout trigger, and quick admin nav |
+| TEST-09 | User Registration & Auth Unit Tests | 🟢 Complete | Agent | 2026-08-31 | 2026-08-31 | Vitest unit tests for password length, email format, and initial entitlement grant (3/3 passing) |
+
 ---
 
 ## Current Sprint
@@ -121,6 +131,7 @@ Last Updated: 2026-08-31 12:59 IST
 - [x] Phase 8 Launch Readiness & Pre-Flight Verification Complete (15/15 Vitest tests passing, Next.js build clean)
 - [x] Phase 9 Monetization, Razorpay Checkout & Dynamic Projects Complete (Checkout API, SDK modal, projects listing)
 - [x] Phase 10 Operational Telemetry & Admin Dashboard Complete (`/admin` UI, `/api/admin/metrics`, 18/18 Vitest tests passing)
+- [x] Phase 11 Authentication & User Session Suite Complete (`/login`, `/signup`, Supabase SSR clients, Navbar state, 21/21 Vitest tests passing)
 
 ---
 
@@ -154,6 +165,7 @@ Last Updated: 2026-08-31 12:59 IST
 | 2026-08-31 | Phase 7 & 8 Operations, Legal Suite, & Full Pre-Flight Pass | Built `/privacy`, `/terms`, `/refund`, cascade deletion API, XML prompt barrier, PDF printable report, and verified 15/15 unit tests | Complete MVP production readiness certified |
 | 2026-08-31 | Phase 9 Razorpay Checkout & Dynamic Projects Listing | Connected live Razorpay order creation API, client-side SDK modal, and dynamic `/projects` listing | End-to-end payment & project lifecycle active |
 | 2026-08-31 | Phase 10 Operational Telemetry & Admin Dashboard | Built `/admin` dashboard and `/api/admin/metrics` tracking real-time unit economics vs ₹6.00 cap and ₹99 ceiling | Real-time economic visibility & quality monitoring |
+| 2026-08-31 | Phase 11 Authentication & User Session Suite | Built `/login` & `/signup`, `@supabase/ssr` client/server helpers, auth API endpoints, and Navbar session switcher | Fulfills DoD §40 user registration & 1-free-credit onboarding |
 
 
 ---
