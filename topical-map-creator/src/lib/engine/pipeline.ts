@@ -2,6 +2,7 @@ import { DataForSEOProvider } from './providers/dataforseo';
 import { AIRouter } from './ai/router';
 import { calculatePriorityScore } from './scoring/priority';
 import { runQualityGates } from './validation/quality_gates';
+import { sanitizeUserInput } from './ai/sanitization';
 import { GenerationInput, EngineResult, ProcessedTopic, TopicCluster, InternalLinkSuggestion } from './types';
 
 export class TopicalAuthorityEngine {
@@ -14,11 +15,12 @@ export class TopicalAuthorityEngine {
   }
 
   public async executePipeline(input: GenerationInput): Promise<EngineResult> {
-    console.log(`[TopicalEngine] Executing pipeline for topic: "${input.primaryTopic}"`);
+    const cleanPrimaryTopic = sanitizeUserInput(input.primaryTopic);
+    console.log(`[TopicalEngine] Executing pipeline for topic: "${cleanPrimaryTopic}"`);
 
     // Stage 1 & 2: Candidate Topic Expansion
     const { candidates, costInr: searchCostInr } = await this.dataProvider.getCandidateTopics(
-      input.primaryTopic,
+      cleanPrimaryTopic,
       input.targetCountry
     );
 
@@ -26,7 +28,7 @@ export class TopicalAuthorityEngine {
 
     // Stage 3 & 4: AI Semantic Clustering & Intent Reasoning
     const { clusters: rawClusters, categorizedTopics, aiCostInr } = await this.aiRouter.generateClustersAndIntent(
-      input.primaryTopic,
+      cleanPrimaryTopic,
       candidateTitles
     );
 
