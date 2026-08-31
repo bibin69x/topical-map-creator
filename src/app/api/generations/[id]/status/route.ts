@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { activeGenerations } from '../trigger/route';
+import { activeGenerations } from '@/lib/engine/store';
 
 export async function GET(req: Request, { params }: { params: { id: string } }) {
   const generationId = params.id;

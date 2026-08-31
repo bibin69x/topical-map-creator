@@ -1,5 +1,6 @@
 import { NextResponse } from 'next/server';
 import { TopicalAuthorityEngine } from '@/lib/engine/pipeline';
+import { activeGenerations } from '@/lib/engine/store';
 import { z } from 'zod';
 
 const triggerSchema = z.object({
@@ -8,9 +9,6 @@ const triggerSchema = z.object({
   targetCountry: z.string().default('IN'),
   language: z.string().default('en')
 });
-
-// In-memory job store for MVP demonstration & testing
-export const activeGenerations = new Map<string, any>();
 
 export async function POST(req: Request) {
   try {
