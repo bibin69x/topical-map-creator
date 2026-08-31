@@ -25,6 +25,17 @@ interface AdminMetrics {
     searchSpendPercentage: number;
     aiSpendPercentage: number;
   };
+  milestones?: {
+    m1_goal: number;
+    m1_progress: number;
+    m2_goal: number;
+    m2_progress: number;
+    m3_goal: number;
+    m3_progress: number;
+    m4_target_customers: number;
+    m4_target_revenue_inr: number;
+    m4_revenue_progress: number;
+  };
   feedbackMetrics?: {
     total: number;
     averageRating: number;
@@ -210,6 +221,97 @@ export default function AdminDashboardPage() {
                 </div>
                 <div className="text-[11px] text-slate-400 font-mono">
                   {metrics.feedbackMetrics?.total || 0} reviews recorded
+                </div>
+              </div>
+            </div>
+
+            {/* V1 Customer Milestones & Targets (§33) */}
+            <div className="bg-slate-900 border border-slate-800 p-6 rounded-lg space-y-4">
+              <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-slate-800 pb-3">
+                <h3 className="text-sm font-semibold text-slate-200 flex items-center space-x-2">
+                  <CheckCircle2 className="h-4 w-4 text-emerald-400" />
+                  <span>V1 Customer Acquisition Milestones (§33 Blueprint)</span>
+                </h3>
+                <span className="text-xs font-mono text-slate-400">
+                  Target: 10,000 Paying Customers (₹19,90,000 Gross Revenue)
+                </span>
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 pt-1">
+                {/* Milestone 1 */}
+                <div className="bg-slate-950/80 border border-slate-800 p-4 rounded-md space-y-2">
+                  <div className="flex justify-between text-xs">
+                    <span className="text-slate-300 font-medium">1. Willingness to Pay</span>
+                    <span className="text-indigo-400 font-mono font-bold">
+                      {metrics.summary.paidCustomers} / 20
+                    </span>
+                  </div>
+                  <div className="h-2 w-full bg-slate-800 rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-indigo-500 rounded-full transition-all"
+                      style={{ width: `${metrics.milestones?.m1_progress || Math.min(100, (metrics.summary.paidCustomers / 20) * 100)}%` }}
+                    />
+                  </div>
+                  <span className="text-[11px] text-slate-400 block font-mono">
+                    {metrics.milestones?.m1_progress || Math.min(100, (metrics.summary.paidCustomers / 20) * 100)}% towards Milestone 1
+                  </span>
+                </div>
+
+                {/* Milestone 2 */}
+                <div className="bg-slate-950/80 border border-slate-800 p-4 rounded-md space-y-2">
+                  <div className="flex justify-between text-xs">
+                    <span className="text-slate-300 font-medium">2. PMF Signal</span>
+                    <span className="text-slate-300 font-mono font-bold">
+                      {metrics.summary.paidCustomers} / 100
+                    </span>
+                  </div>
+                  <div className="h-2 w-full bg-slate-800 rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-indigo-600 rounded-full transition-all"
+                      style={{ width: `${metrics.milestones?.m2_progress || (metrics.summary.paidCustomers / 100) * 100}%` }}
+                    />
+                  </div>
+                  <span className="text-[11px] text-slate-400 block font-mono">
+                    {metrics.milestones?.m2_progress || (metrics.summary.paidCustomers / 100) * 100}% towards 100 users
+                  </span>
+                </div>
+
+                {/* Milestone 3 */}
+                <div className="bg-slate-950/80 border border-slate-800 p-4 rounded-md space-y-2">
+                  <div className="flex justify-between text-xs">
+                    <span className="text-slate-300 font-medium">3. Scale Acquisition</span>
+                    <span className="text-slate-300 font-mono font-bold">
+                      {metrics.summary.paidCustomers} / 1,000
+                    </span>
+                  </div>
+                  <div className="h-2 w-full bg-slate-800 rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-indigo-700 rounded-full transition-all"
+                      style={{ width: `${metrics.milestones?.m3_progress || (metrics.summary.paidCustomers / 1000) * 100}%` }}
+                    />
+                  </div>
+                  <span className="text-[11px] text-slate-400 block font-mono">
+                    {metrics.milestones?.m3_progress || (metrics.summary.paidCustomers / 1000) * 100}% towards 1k scale
+                  </span>
+                </div>
+
+                {/* Long-Term Target */}
+                <div className="bg-slate-950/80 border border-emerald-900/60 p-4 rounded-md space-y-2">
+                  <div className="flex justify-between text-xs">
+                    <span className="text-emerald-300 font-medium">4. Long-Term Target</span>
+                    <span className="text-emerald-400 font-mono font-bold">
+                      ₹{metrics.summary.grossRevenueInr.toLocaleString()}
+                    </span>
+                  </div>
+                  <div className="h-2 w-full bg-slate-800 rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-emerald-500 rounded-full transition-all"
+                      style={{ width: `${metrics.milestones?.m4_revenue_progress || (metrics.summary.grossRevenueInr / 1990000) * 100}%` }}
+                    />
+                  </div>
+                  <span className="text-[11px] text-slate-400 block font-mono">
+                    ₹19,90,000 Target Gross (10k users)
+                  </span>
                 </div>
               </div>
             </div>

@@ -163,6 +163,8 @@ Last Updated: 2026-08-31 21:57 IST
 |----|---------------|--------|-------|---------|-----------|-------|
 | BUILD-27 | Database Seed & Fixture Suite | 🟢 Complete | Agent | 2026-08-31 | 2026-08-31 | `supabase/seed.sql` with demo profile, 10 credits, 2 starter maps, and verified payment |
 | TEST-14 | Deployment Readiness & Seed Integrity Tests | 🟢 Complete | Agent | 2026-08-31 | 2026-08-31 | `src/lib/services/deployment.test.ts` validating env keys, UUID formats, status ENUMs, and integer paise (33/33 tests passing) |
+| BUILD-28 | Customer Acquisition Milestones Tracker UI & API | 🟢 Complete | Agent | 2026-08-31 | 2026-08-31 | `calculateMilestones` service + interactive milestone progress bars in `/admin` fulfilling §33 & §34 |
+| TEST-15 | Milestones Progress & Budget Health Test Suite | 🟢 Complete | Agent | 2026-08-31 | 2026-08-31 | `src/lib/services/metrics.test.ts` unit tests for 20/100/1k/10k target progress & health (36/36 tests passing) |
 
 ---
 
@@ -180,7 +182,7 @@ Last Updated: 2026-08-31 21:57 IST
 - [x] Phase 13 End-to-End Engine Pipeline Integration & Documentation Complete (26/26 Vitest tests passing, root README.md)
 - [x] Phase 14 Beta Cohort Feedback Loop & Quality Reviews Complete (`/api/feedback`, `FeedbackWidget`, 29/29 Vitest tests passing)
 - [x] Phase 15 Pre-Launch Smoke Testing & Deployment Readiness Complete (DOC-19 Beta Runbook, 30/30 Vitest tests passing, tsc clean)
-- [x] Phase 16 Production Release & Cohort Onboarding Complete (Seed fixtures, 33/33 Vitest tests passing, deployment verified)
+- [x] Phase 16 Production Release & Cohort Onboarding Complete (Seed fixtures, Milestone tracker, 36/36 Vitest tests passing, deployment verified)
 - [x] **100% V1 Definition of Done Certified (§40)**
 
 ---
@@ -255,7 +257,7 @@ Last Updated: 2026-08-31 21:57 IST
 | 2026-08-31 | Phase 13 End-to-End Engine Pipeline Integration & Handbook | Built 16-stage pipeline integration test (`pipeline.test.ts`), added entrance sanitization barrier, authored root `README.md` | 26/26 tests passing, comprehensive developer/ops handbook |
 | 2026-08-31 | Phase 14 Beta Cohort Feedback Loop & Quality Reviews | Built `POST /api/feedback`, `FeedbackWidget.tsx` in results view, 5th KPI card & reviews table in `/admin`, and 3 new unit tests | 29/29 tests passing, complete beta user feedback loop active |
 | 2026-08-31 | Phase 15 Pre-Launch Smoke Testing & Beta Runbook | Built `docs/specs/18-beta-launch-runbook.md`, end-to-end user lifecycle smoke test (`smoke.test.ts`), fixed test typing | 30/30 tests passing, strict TypeScript & Next.js production build certified |
-| 2026-08-31 | Phase 16 Production Release & Cohort Onboarding | Created `supabase/seed.sql`, built `deployment.test.ts` verifying env keys & data types | 33/33 tests passing, complete readiness for beta rollout |
+| 2026-08-31 | Phase 16 Production Release & Cohort Onboarding | Created `supabase/seed.sql`, built `metrics.ts` customer milestones tracker, added `metrics.test.ts` | 36/36 tests passing, complete readiness for beta rollout |
 
 
 ---
