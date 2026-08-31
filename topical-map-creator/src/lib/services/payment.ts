@@ -23,5 +23,19 @@ export class PaymentService {
       return false;
     }
   }
-
 }
+
+export interface PaymentOrderReceipt {
+  receiptId: string;
+  amountPaise: number;
+  currency: string;
+}
+
+export function createPaymentOrderReceipt(userId: string, amountInr: number = 199): PaymentOrderReceipt {
+  return {
+    receiptId: `rcpt_${userId}_${Date.now()}`,
+    amountPaise: Math.round(amountInr * 100),
+    currency: 'INR'
+  };
+}
+

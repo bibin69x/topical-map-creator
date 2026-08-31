@@ -68,7 +68,8 @@ describe('TopicalAuthorityEngine Pipeline Integration', () => {
     const result = await engine.executePipeline({
       projectId: 'test-proj-002',
       primaryTopic: '  <script>alert("hack")</script> Next.js SEO & Web Vitals!!!  ',
-      targetCountry: 'IN'
+      targetCountry: 'IN',
+      language: 'en'
     });
 
     expect(result.primaryTopic).toBeTruthy();
