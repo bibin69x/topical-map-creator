@@ -35,12 +35,16 @@ export async function POST(req: Request) {
     const generationId = `gen-${Date.now()}`;
     const projectId = `proj-${Date.now()}`;
 
+    const createdAt = new Date().toISOString().split('T')[0];
+
     // Initialize queued job
     activeGenerations.set(generationId, {
       id: generationId,
       projectId,
       status: 'PROCESSING',
       primaryTopic: parsed.primaryTopic,
+      websiteUrl: parsed.websiteUrl || '',
+      createdAt,
       progressStage: 'RESEARCHING',
       result: null,
       error: null
@@ -60,6 +64,8 @@ export async function POST(req: Request) {
         projectId,
         status: 'COMPLETED',
         primaryTopic: parsed.primaryTopic,
+        websiteUrl: parsed.websiteUrl || '',
+        createdAt,
         progressStage: 'COMPLETED',
         result,
         error: null
@@ -70,6 +76,8 @@ export async function POST(req: Request) {
         projectId,
         status: 'FAILED',
         primaryTopic: parsed.primaryTopic,
+        websiteUrl: parsed.websiteUrl || '',
+        createdAt,
         progressStage: 'FAILED',
         result: null,
         error: err.message || 'Generation failed'
