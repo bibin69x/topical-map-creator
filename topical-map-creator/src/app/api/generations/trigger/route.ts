@@ -16,6 +16,8 @@ const triggerSchema = z.object({
 export async function POST(req: Request) {
   try {
     const body = await req.json();
+    const parsed = triggerSchema.parse(body);
+
     // Check concurrency lock: reject if a job is already processing (§DOC-14 & §DOC-06)
     const hasActiveJob = Array.from(activeGenerations.values()).some(
       g => g.status === 'PROCESSING' && Date.now() - parseInt(g.id.replace('gen-', '')) < 60000
