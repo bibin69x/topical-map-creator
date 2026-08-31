@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Compass, Zap, Folder, PlusCircle, LogOut, LogIn, User, Shield } from 'lucide-react';
+import { Compass, Zap, Folder, PlusCircle, LogOut, LogIn, User, Shield, Settings } from 'lucide-react';
 import { Button } from '../ui/button';
 
 interface TacUser {
@@ -55,6 +55,10 @@ export function Navbar({ creditsRemaining = 1, isPaid = false }: { creditsRemain
             <Link href="/projects" className="flex items-center space-x-1.5 hover:text-white transition-colors py-1 px-2 rounded">
               <Folder className="h-4 w-4 text-slate-400" />
               <span>Projects</span>
+            </Link>
+            <Link href="/settings" className="flex items-center space-x-1.5 text-slate-400 hover:text-slate-200 transition-colors py-1 px-2 rounded">
+              <Settings className="h-3.5 w-3.5" />
+              <span>Settings</span>
             </Link>
             <Link href="/admin" className="flex items-center space-x-1.5 text-slate-400 hover:text-slate-200 transition-colors py-1 px-2 rounded">
               <Shield className="h-3.5 w-3.5" />
