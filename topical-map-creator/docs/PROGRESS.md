@@ -67,28 +67,24 @@ Last Updated: 2026-08-31 12:59 IST
 | BUILD-04 | API Contracts & Services | 🟢 Complete | Agent | 2026-08-31 | 2026-08-31 | Entitlements, Razorpay HMAC webhook, CSV export generator |
 | BUILD-05 | Anti-Slop UI & 6-Tab Dashboard | 🟢 Complete | Agent | 2026-08-31 | 2026-08-31 | Landing page, dashboard, async generation progress, 6-tab results UI |
 
+## Phase 6 — Quality Assurance & Critical Logic Tests
+
+| ID | Module / Task | Status | Owner | Started | Completed | Notes |
+|----|---------------|--------|-------|---------|-----------|-------|
+| TEST-01 | Test Runner Setup | 🟢 Complete | Agent | 2026-08-31 | 2026-08-31 | Vitest test runner setup & `npm test` script |
+| TEST-02 | Scoring & Quality Gates Unit Tests | 🟢 Complete | Agent | 2026-08-31 | 2026-08-31 | Priority scoring formula & 10 quality gates unit tests |
+| TEST-03 | Razorpay HMAC & Security Logic Tests | 🟢 Complete | Agent | 2026-08-31 | 2026-08-31 | HMAC-SHA256 signature verification & length mismatch safeguard |
+| TEST-04 | CSV Export Service Tests | 🟢 Complete | Agent | 2026-08-31 | 2026-08-31 | CSV escaping, structure & spreadsheet export unit tests |
+
 ---
 
 ## Current Sprint
 
-- [x] DOC-01: Research Provider Evaluation — web research + draft
-- [x] DOC-02: AI Model Strategy — empirical benchmarks + draft complete
-- [x] DOC-03: Cost Budget Model (GO/NO-GO GATE) — PASS (GO CERTIFIED)!
-- [x] DOC-04: System Architecture — draft complete
-- [x] DOC-05: Database Schema & RLS Policies — complete DDL & RLS
-- [x] DOC-06: API Contract & Route Specification — RESTful contract & Zod schemas
-- [x] DOC-07: Auth & Authorization Spec — Supabase Auth & entitlement middleware
-- [x] DOC-08: Engine Pipeline Specification (Core IP) — 16-stage pipeline & quality gates
-- [x] DOC-09: Prompt Engineering Specification — System prompts & Zod schemas
-- [x] DOC-10: Priority Scoring Framework — Deterministic scoring formula
-- [x] DOC-11: Generation Budget & Cost Control Spec — Hard caps & transactional refund
-- [x] DOC-12: UI/UX Wireframes & Component Spec — Anti-slop design system & wireframes
-- [x] DOC-13: Payment & Entitlement Spec — Razorpay webhook & grant trigger
-- [x] DOC-14: Security & Abuse Prevention Spec — Edge rate limiting & injection defense
-- [x] DOC-15: Observability & Monitoring Spec — Telemetry stack & SQL admin analytics
-- [x] DOC-16: Legal Documents Spec — Privacy disclosures & account deletion cascade
-- [x] **ALL 16 PRE-CODE SPECIFICATION DOCUMENTS CREATED & CERTIFIED!**
-- [x] **Phase 5 Sprint**: Production Codebase Implementation Complete! (Next.js App Router, Supabase DDL, 16-Stage Engine, 6-Tab Dashboard)
+- [x] DOC-01 through DOC-16 Specs Complete
+- [x] Phase 5 Production Codebase Implementation Complete
+- [x] Phase 6 Sprint: Quality Assurance & Critical Logic Tests Complete (10/10 Vitest unit tests passing)
+
+
 
 ---
 
@@ -118,6 +114,8 @@ Last Updated: 2026-08-31 12:59 IST
 | 2026-08-31 | Shared Engine Store Module (`store.ts`) | Extracted in-memory store to eliminate relative API route bundler resolution conflicts | Clean Next.js Webpack compilation on Vercel |
 | 2026-08-31 | Phase 5 Production Build Deployment | All 5 build modules implemented, tested, and pushed to GitHub main branch | Production deployment complete |
 | 2026-08-31 | Resolution of Vercel App Router Prerender Error | Removed redundant `src/app/page.tsx` re-export, fixing `clientModules` undefined prerender crash | Vercel production build & static export verified |
+| 2026-08-31 | Phase 6 Critical Security & Logic Test Suite | Implemented Vitest suite covering priority scoring, quality gates, Razorpay HMAC, & CSV export | 10/10 automated tests passing |
+
 
 ---
 

@@ -11,8 +11,9 @@ export function runQualityGates(
   // 1. Minimum Topic Count Check
   if (topics.length < 10) {
     failureReasons.push(`Insufficient topic volume (${topics.length} topics < 10 minimum).`);
-    score -= 25;
+    score -= 35;
   }
+
 
   // 2. Cluster Presence Check
   if (clusters.length === 0) {

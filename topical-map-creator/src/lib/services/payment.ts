@@ -14,10 +14,14 @@ export class PaymentService {
         .createHmac('sha256', this.webhookSecret)
         .update(payload)
         .digest('hex');
-      return crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(expectedSignature));
+      const expectedBuffer = Buffer.from(expectedSignature);
+      const signatureBuffer = Buffer.from(signature);
+      if (expectedBuffer.length !== signatureBuffer.length) return false;
+      return crypto.timingSafeEqual(signatureBuffer, expectedBuffer);
     } catch (err) {
       console.error('Razorpay signature verification error:', err);
       return false;
     }
   }
+
 }
