@@ -1,6 +1,8 @@
 import { NextResponse } from 'next/server';
 import { PaymentService } from '@/lib/services/payment';
 
+export const dynamic = 'force-dynamic';
+
 export async function POST(req: Request) {
   try {
     const rawBody = await req.text();

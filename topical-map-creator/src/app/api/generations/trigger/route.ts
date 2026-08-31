@@ -3,6 +3,9 @@ import { TopicalAuthorityEngine } from '@/lib/engine/pipeline';
 import { activeGenerations } from '@/lib/engine/store';
 import { z } from 'zod';
 
+export const dynamic = 'force-dynamic';
+
+
 const triggerSchema = z.object({
   primaryTopic: z.string().min(2).max(100),
   websiteUrl: z.string().url().optional().or(z.literal('')),
