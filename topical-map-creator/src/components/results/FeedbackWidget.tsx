@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Star, MessageSquare, CheckCircle, Send, Loader2 } from 'lucide-react';
+import { Star, CheckCircle } from 'lucide-react';
 import { Button } from '../ui/button';
 
 export function FeedbackWidget({ generationId }: { generationId: string }) {
@@ -47,30 +47,27 @@ export function FeedbackWidget({ generationId }: { generationId: string }) {
 
   if (submitted) {
     return (
-      <div className="mt-8 bg-slate-900/60 border border-slate-800 rounded-lg p-5 flex items-center space-x-3 text-emerald-400">
-        <CheckCircle className="h-5 w-5 shrink-0" />
+      <div className="mt-6 bg-slate-900 border border-slate-800 rounded p-4 flex items-center space-x-3 text-emerald-400">
+        <CheckCircle className="h-4 w-4 shrink-0" />
         <div>
-          <h4 className="text-xs font-semibold text-slate-100">Thank you for your beta feedback!</h4>
-          <p className="text-[11px] text-slate-400">Your ratings directly guide our topical engine algorithm tuning.</p>
+          <h4 className="text-xs font-semibold text-white">Feedback Received</h4>
+          <p className="text-[11px] text-slate-400">Thank you for helping calibrate our topical engine algorithms.</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="mt-8 bg-slate-900 border border-slate-800 rounded-lg p-5 space-y-4">
+    <div className="mt-6 bg-slate-900 border border-slate-800 rounded p-4 space-y-3">
       <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-2">
-          <MessageSquare className="h-4 w-4 text-indigo-400" />
-          <h4 className="text-xs font-semibold text-slate-200">Beta User Quality Feedback</h4>
-        </div>
-        <span className="text-[10px] uppercase font-mono tracking-wider text-slate-500 bg-slate-950 px-2 py-0.5 rounded border border-slate-800">
-          Early Access Cohort
+        <h4 className="text-xs font-semibold text-white">Topical Output Quality Feedback</h4>
+        <span className="text-[10px] uppercase font-mono tracking-wider text-slate-400 bg-slate-950 px-2 py-0.5 rounded border border-slate-800">
+          Beta Quality Loop
         </span>
       </div>
 
       <p className="text-xs text-slate-400">
-        Did this topical map deliver the structure and depth you needed? Your feedback helps tune our clustering algorithms.
+        Rate the depth and topical hierarchy accuracy to guide our pipeline optimization.
       </p>
 
       {error && (
@@ -93,7 +90,7 @@ export function FeedbackWidget({ generationId }: { generationId: string }) {
                   onMouseLeave={() => setHoverRating(null)}
                   className="p-1 text-slate-600 hover:text-amber-400 transition-colors focus:outline-none"
                 >
-                  <Star className={`h-4 w-4 ${active ? 'text-amber-400 fill-amber-400' : 'text-slate-600'}`} />
+                  <Star className={`h-3.5 w-3.5 ${active ? 'text-amber-400 fill-amber-400' : 'text-slate-600'}`} />
                 </button>
               );
             })}
@@ -105,7 +102,7 @@ export function FeedbackWidget({ generationId }: { generationId: string }) {
             <select
               value={category}
               onChange={(e) => setCategory(e.target.value as any)}
-              className="bg-slate-950 border border-slate-800 rounded px-2 py-1 text-xs text-slate-300 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+              className="bg-slate-950 border border-slate-800 rounded px-2 py-1 text-xs text-slate-300 focus:outline-none focus:border-slate-500"
             >
               <option value="QUALITY">Topic Quality & Depth</option>
               <option value="ACCURACY">Intent & Hierarchy Accuracy</option>
@@ -120,8 +117,8 @@ export function FeedbackWidget({ generationId }: { generationId: string }) {
             rows={2}
             value={comments}
             onChange={(e) => setComments(e.target.value)}
-            placeholder="Share any thoughts, missing subtopics, or suggestions (optional)..."
-            className="w-full bg-slate-950 border border-slate-800 rounded-md p-2.5 text-xs text-slate-200 placeholder-slate-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+            placeholder="Share any missing subtopics, suggestions, or notes (optional)..."
+            className="w-full bg-slate-950 border border-slate-800 rounded p-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-slate-500"
           />
         </div>
 
@@ -130,29 +127,20 @@ export function FeedbackWidget({ generationId }: { generationId: string }) {
             type="email"
             value={userEmail}
             onChange={(e) => setUserEmail(e.target.value)}
-            placeholder="Your email (optional, for follow-up)"
-            className="bg-slate-950 border border-slate-800 rounded-md px-2.5 py-1.5 text-xs text-slate-300 placeholder-slate-600 focus:outline-none focus:ring-1 focus:ring-indigo-500 sm:w-64"
+            placeholder="Your email (optional)"
+            className="bg-slate-950 border border-slate-800 rounded px-2.5 py-1 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-slate-500 sm:w-64"
           />
 
           <Button
             type="submit"
             disabled={submitting}
-            className="bg-indigo-600 hover:bg-indigo-500 text-white text-xs px-4 py-1.5 flex items-center space-x-1.5"
+            size="sm"
           >
-            {submitting ? (
-              <>
-                <Loader2 className="h-3.5 w-3.5 animate-spin" />
-                <span>Submitting...</span>
-              </>
-            ) : (
-              <>
-                <Send className="h-3.5 w-3.5" />
-                <span>Submit Feedback</span>
-              </>
-            )}
+            {submitting ? 'Submitting...' : 'Submit Feedback'}
           </Button>
         </div>
       </form>
     </div>
   );
 }
+

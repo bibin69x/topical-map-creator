@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Compass, Lock, Mail, User, ArrowRight, Loader2, AlertCircle, CheckCircle2 } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export default function SignupPage() {
@@ -45,78 +44,67 @@ export default function SignupPage() {
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-      <div className="sm:mx-auto sm:w-full sm:max-w-md text-center space-y-2">
-        <Link href="/" className="inline-flex items-center space-x-2 text-indigo-400 font-bold text-xl tracking-tight">
-          <Compass className="h-7 w-7" />
-          <span className="text-slate-100">Topical Authority Creator</span>
+      <div className="sm:mx-auto sm:w-full sm:max-w-md text-left space-y-1">
+        <Link href="/" className="font-bold text-base tracking-tight text-white uppercase font-mono">
+          Topical Authority Creator
         </Link>
-        <h2 className="text-xl font-bold text-slate-100">Create your free account</h2>
+        <h2 className="text-xl font-bold text-white">Create Free Account</h2>
         <p className="text-xs text-slate-400">
           Already have an account?{' '}
-          <Link href="/login" className="text-indigo-400 hover:text-indigo-300 underline font-medium">
+          <Link href="/login" className="text-slate-200 hover:text-white underline font-medium">
             Sign in
           </Link>
         </p>
       </div>
 
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md px-4 sm:px-0">
-        <div className="bg-slate-900 border border-slate-800 py-8 px-6 sm:px-8 rounded-xl shadow-xl space-y-5">
-          <div className="bg-indigo-950/80 border border-indigo-800 p-3 rounded-lg flex items-center space-x-2.5 text-xs text-indigo-300">
-            <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0" />
-            <span>Includes <strong>1 Free Topical Map Generation</strong></span>
+      <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-md px-4 sm:px-0">
+        <div className="bg-slate-900 border border-slate-800 py-6 px-6 rounded space-y-4">
+          <div className="bg-slate-950 border border-slate-700 p-2.5 rounded text-xs text-slate-300 flex items-center justify-between">
+            <span>Free Evaluation Credit:</span>
+            <strong className="text-emerald-400 font-mono">1 Topical Map</strong>
           </div>
 
           {error && (
-            <div className="bg-rose-950/80 border border-rose-800 text-rose-300 text-xs p-3 rounded-md flex items-center space-x-2">
-              <AlertCircle className="h-4 w-4 shrink-0" />
-              <span>{error}</span>
+            <div className="bg-rose-950 border border-rose-800 text-rose-200 text-xs p-2.5 rounded">
+              {error}
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-3">
             <div>
-              <label className="block text-xs font-medium text-slate-300 mb-1">Full Name</label>
-              <div className="relative">
-                <User className="h-4 w-4 text-slate-500 absolute left-3 top-2.5" />
-                <input
-                  type="text"
-                  required
-                  placeholder="Aarav Sharma"
-                  value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-md pl-9 pr-3 py-2 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                />
-              </div>
+              <label className="block text-xs font-semibold text-slate-200 mb-1">Full Name</label>
+              <input
+                type="text"
+                required
+                placeholder="Aarav Sharma"
+                value={fullName}
+                onChange={(e) => setFullName(e.target.value)}
+                className="w-full bg-slate-950 border border-slate-700 rounded px-3 py-1.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-slate-400"
+              />
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-slate-300 mb-1">Email address</label>
-              <div className="relative">
-                <Mail className="h-4 w-4 text-slate-500 absolute left-3 top-2.5" />
-                <input
-                  type="email"
-                  required
-                  placeholder="name@company.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-md pl-9 pr-3 py-2 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                />
-              </div>
+              <label className="block text-xs font-semibold text-slate-200 mb-1">Email address</label>
+              <input
+                type="email"
+                required
+                placeholder="name@company.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full bg-slate-950 border border-slate-700 rounded px-3 py-1.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-slate-400"
+              />
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-slate-300 mb-1">Password (min 8 characters)</label>
-              <div className="relative">
-                <Lock className="h-4 w-4 text-slate-500 absolute left-3 top-2.5" />
-                <input
-                  type="password"
-                  required
-                  placeholder="••••••••"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-md pl-9 pr-3 py-2 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                />
-              </div>
+              <label className="block text-xs font-semibold text-slate-200 mb-1">Password (min 8 characters)</label>
+              <input
+                type="password"
+                required
+                placeholder="••••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full bg-slate-950 border border-slate-700 rounded px-3 py-1.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-slate-400"
+              />
             </div>
 
             <p className="text-[11px] text-slate-500">
@@ -125,26 +113,20 @@ export default function SignupPage() {
               <Link href="/privacy" className="text-slate-400 hover:text-slate-200 underline">Privacy Policy</Link>.
             </p>
 
-            <Button
-              type="submit"
-              disabled={loading}
-              className="w-full justify-center bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-2 space-x-2"
-            >
-              {loading ? (
-                <>
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                  <span>Creating Account...</span>
-                </>
-              ) : (
-                <>
-                  <span>Create Account & Get Free Map</span>
-                  <ArrowRight className="h-4 w-4" />
-                </>
-              )}
-            </Button>
+            <div className="pt-1">
+              <Button
+                type="submit"
+                disabled={loading}
+                size="lg"
+                className="w-full justify-center"
+              >
+                {loading ? 'Creating Account...' : 'Create Account & Get Free Map'}
+              </Button>
+            </div>
           </form>
         </div>
       </div>
     </div>
   );
 }
+

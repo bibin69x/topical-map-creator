@@ -3,7 +3,6 @@
 import { useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Compass, Lock, Mail, ArrowRight, Loader2, AlertCircle, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export default function LoginPage() {
@@ -51,84 +50,69 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
-      <div className="sm:mx-auto sm:w-full sm:max-w-md text-center space-y-2">
-        <Link href="/" className="inline-flex items-center space-x-2 text-indigo-400 font-bold text-xl tracking-tight">
-          <Compass className="h-7 w-7" />
-          <span className="text-slate-100">Topical Authority Creator</span>
+      <div className="sm:mx-auto sm:w-full sm:max-w-md text-left space-y-1">
+        <Link href="/" className="font-bold text-base tracking-tight text-white uppercase font-mono">
+          Topical Authority Creator
         </Link>
-        <h2 className="text-xl font-bold text-slate-100">Sign in to your account</h2>
+        <h2 className="text-xl font-bold text-white">Sign In</h2>
         <p className="text-xs text-slate-400">
           Or{' '}
-          <Link href="/signup" className="text-indigo-400 hover:text-indigo-300 underline font-medium">
+          <Link href="/signup" className="text-slate-200 hover:text-white underline font-medium">
             create a new account for 1 free topical map
           </Link>
         </p>
       </div>
 
-      <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md px-4 sm:px-0">
-        <div className="bg-slate-900 border border-slate-800 py-8 px-6 sm:px-8 rounded-xl shadow-xl space-y-6">
+      <div className="mt-6 sm:mx-auto sm:w-full sm:max-w-md px-4 sm:px-0">
+        <div className="bg-slate-900 border border-slate-800 py-6 px-6 rounded space-y-4">
           {error && (
-            <div className="bg-rose-950/80 border border-rose-800 text-rose-300 text-xs p-3 rounded-md flex items-center space-x-2">
-              <AlertCircle className="h-4 w-4 shrink-0" />
-              <span>{error}</span>
+            <div className="bg-rose-950 border border-rose-800 text-rose-200 text-xs p-2.5 rounded">
+              {error}
             </div>
           )}
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="space-y-3">
             <div>
-              <label className="block text-xs font-medium text-slate-300 mb-1">Email address</label>
-              <div className="relative">
-                <Mail className="h-4 w-4 text-slate-500 absolute left-3 top-2.5" />
-                <input
-                  type="email"
-                  required
-                  placeholder="name@company.com"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-md pl-9 pr-3 py-2 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                />
-              </div>
+              <label className="block text-xs font-semibold text-slate-200 mb-1">Email address</label>
+              <input
+                type="email"
+                required
+                placeholder="name@company.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                className="w-full bg-slate-950 border border-slate-700 rounded px-3 py-1.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-slate-400"
+              />
             </div>
 
             <div>
-              <label className="block text-xs font-medium text-slate-300 mb-1">Password</label>
-              <div className="relative">
-                <Lock className="h-4 w-4 text-slate-500 absolute left-3 top-2.5" />
-                <input
-                  type="password"
-                  required
-                  placeholder="••••••••"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  className="w-full bg-slate-950 border border-slate-800 rounded-md pl-9 pr-3 py-2 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
-                />
-              </div>
+              <label className="block text-xs font-semibold text-slate-200 mb-1">Password</label>
+              <input
+                type="password"
+                required
+                placeholder="••••••••"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="w-full bg-slate-950 border border-slate-700 rounded px-3 py-1.5 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-slate-400"
+              />
             </div>
 
-            <Button
-              type="submit"
-              disabled={loading}
-              className="w-full justify-center bg-indigo-600 hover:bg-indigo-500 text-white font-medium py-2 space-x-2"
-            >
-              {loading ? (
-                <>
-                  <Loader2 className="h-4 w-4 animate-spin" />
-                  <span>Signing in...</span>
-                </>
-              ) : (
-                <>
-                  <span>Sign In</span>
-                  <ArrowRight className="h-4 w-4" />
-                </>
-              )}
-            </Button>
+            <div className="pt-1">
+              <Button
+                type="submit"
+                disabled={loading}
+                size="lg"
+                className="w-full justify-center"
+              >
+                {loading ? 'Signing in...' : 'Sign In'}
+              </Button>
+            </div>
           </form>
 
-          <div className="relative">
+          <div className="relative py-1">
             <div className="absolute inset-0 flex items-center">
               <div className="w-full border-t border-slate-800" />
             </div>
-            <div className="relative flex justify-center text-xs">
+            <div className="relative flex justify-center text-[10px]">
               <span className="bg-slate-900 px-2 text-slate-500 font-mono">OR</span>
             </div>
           </div>
@@ -137,9 +121,8 @@ export default function LoginPage() {
             type="button"
             variant="outline"
             onClick={handleDemoSignIn}
-            className="w-full justify-center space-x-2 text-xs text-slate-300 border-slate-700 hover:bg-slate-800"
+            className="w-full justify-center text-xs"
           >
-            <Sparkles className="h-3.5 w-3.5 text-indigo-400" />
             <span>Instant Demo Access (No Password)</span>
           </Button>
         </div>
@@ -147,3 +130,4 @@ export default function LoginPage() {
     </div>
   );
 }
+

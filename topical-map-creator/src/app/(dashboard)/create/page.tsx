@@ -2,7 +2,6 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { Compass, Sparkles, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 export default function CreateProjectPage() {
@@ -48,41 +47,39 @@ export default function CreateProjectPage() {
   };
 
   return (
-    <div className="max-w-xl mx-auto space-y-6 py-6">
+    <div className="max-w-xl mx-auto space-y-5 py-4">
       <div>
-        <h1 className="text-2xl font-bold text-slate-100 flex items-center space-x-2">
-          <Compass className="h-6 w-6 text-indigo-400" />
-          <span>Create New Topical Map</span>
+        <h1 className="text-xl font-bold text-white tracking-tight">
+          Create New Topical Map
         </h1>
         <p className="text-xs text-slate-400 mt-1">
-          Enter your niche or primary pillar topic to build an actionable topical authority architecture.
+          Specify your primary niche topic and market location to generate content clusters and hierarchy.
         </p>
       </div>
 
       {error && (
-        <div className="bg-rose-950/80 border border-rose-800 text-rose-300 text-xs p-3 rounded-md flex items-center space-x-2">
-          <AlertCircle className="h-4 w-4 shrink-0" />
-          <span>{error}</span>
+        <div className="bg-rose-950 border border-rose-800 text-rose-200 text-xs p-3 rounded">
+          {error}
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="bg-slate-900 border border-slate-800 rounded-lg p-6 space-y-5">
+      <form onSubmit={handleSubmit} className="bg-slate-900 border border-slate-800 rounded p-5 space-y-4">
         <div>
-          <label className="block text-xs font-medium text-slate-300 mb-1.5">
-            Primary Topic <span className="text-indigo-400">*</span>
+          <label className="block text-xs font-semibold text-slate-200 mb-1">
+            Primary Niche / Topic <span className="text-rose-400">*</span>
           </label>
           <input
             type="text"
             required
-            placeholder="e.g. Technical SEO, Content Marketing, Electric Vehicles"
+            placeholder="e.g. Technical SEO, Organic Dog Food, B2B SaaS Content Marketing"
             value={primaryTopic}
             onChange={(e) => setPrimaryTopic(e.target.value)}
-            className="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full bg-slate-950 border border-slate-700 rounded px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-slate-400"
           />
         </div>
 
         <div>
-          <label className="block text-xs font-medium text-slate-300 mb-1.5">
+          <label className="block text-xs font-semibold text-slate-200 mb-1">
             Website URL <span className="text-slate-500 font-normal">(Optional)</span>
           </label>
           <input
@@ -90,17 +87,17 @@ export default function CreateProjectPage() {
             placeholder="https://example.com"
             value={websiteUrl}
             onChange={(e) => setWebsiteUrl(e.target.value)}
-            className="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-sm text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+            className="w-full bg-slate-950 border border-slate-700 rounded px-3 py-2 text-xs text-white placeholder-slate-500 focus:outline-none focus:border-slate-400"
           />
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-2 gap-3">
           <div>
-            <label className="block text-xs font-medium text-slate-300 mb-1.5">Target Country</label>
+            <label className="block text-xs font-semibold text-slate-200 mb-1">Target Market</label>
             <select
               value={country}
               onChange={(e) => setCountry(e.target.value)}
-              className="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full bg-slate-950 border border-slate-700 rounded px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-slate-400"
             >
               <option value="IN">India (IN)</option>
               <option value="US">United States (US)</option>
@@ -109,11 +106,11 @@ export default function CreateProjectPage() {
           </div>
 
           <div>
-            <label className="block text-xs font-medium text-slate-300 mb-1.5">Language</label>
+            <label className="block text-xs font-semibold text-slate-200 mb-1">Language</label>
             <select
               value={language}
               onChange={(e) => setLanguage(e.target.value)}
-              className="w-full bg-slate-950 border border-slate-800 rounded-md px-3 py-2 text-xs text-slate-200 focus:outline-none focus:ring-2 focus:ring-indigo-500"
+              className="w-full bg-slate-950 border border-slate-700 rounded px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-slate-400"
             >
               <option value="en">English</option>
             </select>
@@ -124,13 +121,14 @@ export default function CreateProjectPage() {
           <Button
             type="submit"
             disabled={loading}
-            className="w-full justify-center space-x-2 bg-indigo-600 hover:bg-indigo-500 text-white py-2.5"
+            size="lg"
+            className="w-full justify-center"
           >
-            <Sparkles className="h-4 w-4" />
-            <span>{loading ? 'Initializing Engine...' : 'Generate Topical Map'}</span>
+            {loading ? 'Initializing Topical Engine...' : 'Generate Topical Map'}
           </Button>
         </div>
       </form>
     </div>
   );
 }
+

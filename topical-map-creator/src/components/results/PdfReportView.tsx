@@ -19,20 +19,19 @@ export function PdfReportView({
   const mediumPriorityTopics = result.topics.filter(t => t.priority === 'MEDIUM');
 
   return (
-    <div className="fixed inset-0 z-50 bg-slate-950/95 overflow-y-auto p-4 sm:p-8 flex justify-center backdrop-blur-md">
-      <div className="w-full max-w-4xl bg-white text-slate-900 rounded-xl shadow-2xl p-8 sm:p-12 space-y-8 print:p-0 print:shadow-none print:w-full print:max-w-none">
+    <div className="fixed inset-0 z-50 bg-slate-950/90 overflow-y-auto p-4 sm:p-8 flex justify-center">
+      <div className="w-full max-w-4xl bg-white text-slate-900 rounded shadow-lg p-8 sm:p-10 space-y-6 print:p-0 print:shadow-none print:w-full print:max-w-none">
         {/* Print / Close Control Bar (Hidden on Print) */}
-        <div className="flex items-center justify-between border-b border-slate-200 pb-4 print:hidden">
-          <div className="flex items-center space-x-2 text-indigo-700 font-bold">
-            <Compass className="h-5 w-5" />
-            <span>Executive Strategy Report Preview</span>
+        <div className="flex items-center justify-between border-b border-slate-200 pb-3 print:hidden">
+          <div className="text-xs font-bold font-mono uppercase text-slate-700">
+            Executive Strategy Report Preview
           </div>
           <div className="flex items-center space-x-3">
-            <Button onClick={handlePrint} className="bg-indigo-600 hover:bg-indigo-700 text-white space-x-1.5">
-              <Printer className="h-4 w-4" />
+            <Button onClick={handlePrint} size="sm" className="space-x-1.5">
+              <Printer className="h-3.5 w-3.5" />
               <span>Print / Save as PDF</span>
             </Button>
-            <Button onClick={onClose} variant="ghost" className="text-slate-600 hover:text-slate-900">
+            <Button onClick={onClose} variant="ghost" size="sm" className="text-slate-600 hover:text-slate-900">
               <X className="h-4 w-4" />
             </Button>
           </div>
@@ -143,7 +142,7 @@ export function PdfReportView({
 
         {/* Footer */}
         <div className="border-t border-slate-200 pt-6 flex justify-between items-center text-[11px] text-slate-500 font-mono">
-          <span>Topical Authority Creator — Strategic Content Architecture</span>
+          <span>Topical Authority Creator : Strategic Content Architecture</span>
           <span>Confidential Client Strategy Report</span>
         </div>
       </div>

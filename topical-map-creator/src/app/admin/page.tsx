@@ -90,30 +90,29 @@ export default function AdminDashboardPage() {
   return (
     <div className="min-h-screen bg-slate-950 text-slate-100 flex flex-col">
       {/* Header */}
-      <header className="border-b border-slate-800 bg-slate-900/80 sticky top-0 z-40 backdrop-blur-md">
-        <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between">
+      <header className="border-b border-slate-800 bg-slate-900 sticky top-0 z-40">
+        <div className="max-w-7xl mx-auto px-4 h-14 flex items-center justify-between">
           <div className="flex items-center space-x-3">
             <Link href="/projects" className="text-slate-400 hover:text-white transition-colors">
-              <ArrowLeft className="h-5 w-5" />
+              <ArrowLeft className="h-4 w-4" />
             </Link>
             <div className="flex items-center space-x-2">
-              <Compass className="h-5 w-5 text-indigo-400" />
-              <span className="font-bold text-base text-slate-100">Topical Authority Creator</span>
-              <span className="text-[10px] font-mono uppercase bg-rose-950 text-rose-300 border border-rose-800 px-1.5 py-0.5 rounded">
-                Admin Telemetry
+              <span className="font-bold text-sm text-white uppercase font-mono">Topical Authority Creator</span>
+              <span className="text-[10px] font-mono uppercase bg-slate-800 text-slate-300 border border-slate-700 px-1.5 py-0.5 rounded">
+                Telemetry
               </span>
             </div>
           </div>
 
-          <div className="flex items-center space-x-3">
+          <div className="flex items-center space-x-2">
             <Button
               variant="outline"
               size="sm"
               onClick={fetchMetrics}
               disabled={refreshing}
-              className="space-x-1.5 text-xs text-slate-300"
+              className="space-x-1 text-xs"
             >
-              <RefreshCw className={`h-3.5 w-3.5 ${refreshing ? 'animate-spin' : ''}`} />
+              <RefreshCw className={`h-3 w-3 ${refreshing ? 'animate-spin' : ''}`} />
               <span>Refresh</span>
             </Button>
             <Link href="/projects">
@@ -126,101 +125,93 @@ export default function AdminDashboardPage() {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 py-8 flex-1 space-y-8 w-full">
+      <main className="max-w-7xl mx-auto px-4 py-6 flex-1 space-y-6 w-full">
         {loading ? (
-          <div className="py-24 text-center space-y-3">
-            <Loader2 className="h-8 w-8 text-indigo-400 animate-spin mx-auto" />
-            <p className="text-xs text-slate-400 font-mono">Aggregating real-time operational telemetry...</p>
+          <div className="py-20 text-center space-y-2">
+            <p className="text-xs text-slate-400 font-mono">Aggregating operational telemetry...</p>
           </div>
         ) : !metrics ? (
-          <div className="bg-rose-950/80 border border-rose-800 text-rose-300 text-xs p-4 rounded text-center">
+          <div className="bg-rose-950 border border-rose-800 text-rose-200 text-xs p-4 rounded text-center">
             Unable to load telemetry metrics. Please ensure backend server is operational.
           </div>
         ) : (
           <>
             {/* Title & Status */}
-            <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-slate-800 pb-4">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-3 border-b border-slate-800 pb-3">
               <div>
-                <h1 className="text-2xl font-bold text-slate-100 flex items-center space-x-2">
-                  <Activity className="h-6 w-6 text-emerald-400" />
-                  <span>Operations & Economics Telemetry</span>
+                <h1 className="text-xl font-bold text-white tracking-tight">
+                  Operations & Economics Telemetry
                 </h1>
-                <p className="text-xs text-slate-400 mt-1">
-                  Real-time pipeline reliability, generation audit logs, and cost tracking vs ₹6.00 job cap & ₹99 ceiling.
+                <p className="text-xs text-slate-400 mt-0.5">
+                  Pipeline reliability, generation audit logs, and unit economics vs ₹6.00 job cap & ₹99 ceiling.
                 </p>
               </div>
 
-              <div className="flex items-center space-x-2 bg-slate-900 border border-slate-800 px-3 py-1.5 rounded text-xs font-mono">
-                <span className="h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
-                <span className="text-slate-300">Cap Health:</span>
+              <div className="flex items-center space-x-2 bg-slate-900 border border-slate-800 px-2.5 py-1 rounded text-xs font-mono">
+                <span className="text-slate-400">Cap Health:</span>
                 <strong className="text-emerald-400 font-bold">{metrics.summary.costCapHealth}</strong>
               </div>
             </div>
 
             {/* KPI Cards Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
-              <div className="bg-slate-900 border border-slate-800 p-5 rounded-lg space-y-2">
-                <div className="flex items-center justify-between text-xs text-slate-400">
-                  <span>Generation Success Rate</span>
-                  <ShieldCheck className="h-4 w-4 text-emerald-400" />
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+              <div className="bg-slate-900 border border-slate-800 p-4 rounded space-y-1">
+                <div className="text-[11px] text-slate-400 font-mono uppercase">
+                  Success Rate
                 </div>
-                <div className="text-2xl font-bold text-slate-100 font-mono">
+                <div className="text-2xl font-bold text-white font-mono">
                   {metrics.summary.successRatePercentage}%
                 </div>
-                <div className="text-[11px] text-slate-400 font-mono">
-                  {metrics.summary.completedGenerations} completed • {metrics.summary.failedGenerations} failed
+                <div className="text-[11px] text-slate-500 font-mono">
+                  {metrics.summary.completedGenerations} ok • {metrics.summary.failedGenerations} err
                 </div>
               </div>
 
-              <div className="bg-slate-900 border border-slate-800 p-5 rounded-lg space-y-2">
-                <div className="flex items-center justify-between text-xs text-slate-400">
-                  <span>Avg Cost / Job</span>
-                  <DollarSign className="h-4 w-4 text-indigo-400" />
+              <div className="bg-slate-900 border border-slate-800 p-4 rounded space-y-1">
+                <div className="text-[11px] text-slate-400 font-mono uppercase">
+                  Avg Cost / Job
                 </div>
-                <div className="text-2xl font-bold text-indigo-400 font-mono">
+                <div className="text-2xl font-bold text-white font-mono">
                   ₹{metrics.summary.avgCostPerGenerationInr}
                 </div>
-                <div className="text-[11px] text-slate-400 font-mono">
-                  Hard Cap: ₹{metrics.summary.targetMaxCostPerJobInr.toFixed(2)} (Safe)
+                <div className="text-[11px] text-slate-500 font-mono">
+                  Cap: ₹{metrics.summary.targetMaxCostPerJobInr.toFixed(2)}
                 </div>
               </div>
 
-              <div className="bg-slate-900 border border-slate-800 p-5 rounded-lg space-y-2">
-                <div className="flex items-center justify-between text-xs text-slate-400">
-                  <span>Total Variable Spend</span>
-                  <Database className="h-4 w-4 text-amber-400" />
+              <div className="bg-slate-900 border border-slate-800 p-4 rounded space-y-1">
+                <div className="text-[11px] text-slate-400 font-mono uppercase">
+                  Variable Spend
                 </div>
                 <div className="text-2xl font-bold text-amber-400 font-mono">
                   ₹{metrics.summary.totalVariableSpendInr}
                 </div>
-                <div className="text-[11px] text-slate-400 font-mono">
-                  Across {metrics.summary.totalGenerations} executions
+                <div className="text-[11px] text-slate-500 font-mono">
+                  {metrics.summary.totalGenerations} jobs
                 </div>
               </div>
 
-              <div className="bg-slate-900 border border-slate-800 p-5 rounded-lg space-y-2">
-                <div className="flex items-center justify-between text-xs text-slate-400">
-                  <span>Gross Revenue</span>
-                  <DollarSign className="h-4 w-4 text-emerald-400" />
+              <div className="bg-slate-900 border border-slate-800 p-4 rounded space-y-1">
+                <div className="text-[11px] text-slate-400 font-mono uppercase">
+                  Gross Revenue
                 </div>
                 <div className="text-2xl font-bold text-emerald-400 font-mono">
                   ₹{metrics.summary.grossRevenueInr}
                 </div>
-                <div className="text-[11px] text-slate-400 font-mono">
-                  {metrics.summary.paidCustomers} users (@ ₹199)
+                <div className="text-[11px] text-slate-500 font-mono">
+                  {metrics.summary.paidCustomers} paid (@ ₹199)
                 </div>
               </div>
 
-              <div className="bg-slate-900 border border-slate-800 p-5 rounded-lg space-y-2">
-                <div className="flex items-center justify-between text-xs text-slate-400">
-                  <span>Beta Satisfaction</span>
-                  <Star className="h-4 w-4 text-amber-400 fill-amber-400" />
+              <div className="bg-slate-900 border border-slate-800 p-4 rounded space-y-1">
+                <div className="text-[11px] text-slate-400 font-mono uppercase">
+                  Satisfaction
                 </div>
-                <div className="text-2xl font-bold text-amber-400 font-mono">
-                  {metrics.feedbackMetrics?.averageRating || 4.8} / 5.0
+                <div className="text-2xl font-bold text-white font-mono">
+                  {metrics.feedbackMetrics?.averageRating || 4.8} / 5
                 </div>
-                <div className="text-[11px] text-slate-400 font-mono">
-                  {metrics.feedbackMetrics?.total || 0} reviews recorded
+                <div className="text-[11px] text-slate-500 font-mono">
+                  {metrics.feedbackMetrics?.total || 0} reviews
                 </div>
               </div>
             </div>

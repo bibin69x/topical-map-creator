@@ -3,7 +3,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { Compass, Zap, Folder, PlusCircle, LogOut, LogIn, User, Shield, Settings } from 'lucide-react';
+import { LogOut, LogIn } from 'lucide-react';
 import { Button } from '../ui/button';
 
 interface TacUser {
@@ -39,55 +39,47 @@ export function Navbar({ creditsRemaining = 1, isPaid = false }: { creditsRemain
   };
 
   return (
-    <header className="sticky top-0 z-40 border-b border-slate-800 bg-slate-900/90 backdrop-blur-md">
-      <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+    <header className="sticky top-0 z-40 border-b border-slate-800 bg-slate-900">
+      <div className="mx-auto flex h-14 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
         <div className="flex items-center space-x-6">
-          <Link href="/projects" className="flex items-center space-x-2 text-indigo-400 font-bold text-lg tracking-tight">
-            <Compass className="h-6 w-6" />
-            <span className="text-slate-100 font-semibold">
-              Topical Authority{' '}
-              <span className="text-indigo-400 font-mono text-xs px-1.5 py-0.5 rounded bg-indigo-950 border border-indigo-800">
-                MVP
-              </span>
+          <Link href="/projects" className="flex items-center space-x-2 font-bold text-sm tracking-tight text-white uppercase font-mono">
+            <span>Topical Authority</span>
+            <span className="text-[10px] px-1.5 py-0.5 rounded bg-slate-800 border border-slate-700 text-slate-300">
+              MVP
             </span>
           </Link>
-          <nav className="hidden md:flex space-x-4 text-sm font-medium text-slate-300">
-            <Link href="/projects" className="flex items-center space-x-1.5 hover:text-white transition-colors py-1 px-2 rounded">
-              <Folder className="h-4 w-4 text-slate-400" />
-              <span>Projects</span>
+          <nav className="hidden md:flex space-x-4 text-xs font-medium text-slate-300">
+            <Link href="/projects" className="hover:text-white transition-colors py-1 px-2 rounded">
+              Projects
             </Link>
-            <Link href="/settings" className="flex items-center space-x-1.5 text-slate-400 hover:text-slate-200 transition-colors py-1 px-2 rounded">
-              <Settings className="h-3.5 w-3.5" />
-              <span>Settings</span>
+            <Link href="/settings" className="text-slate-400 hover:text-white transition-colors py-1 px-2 rounded">
+              Settings
             </Link>
-            <Link href="/admin" className="flex items-center space-x-1.5 text-slate-400 hover:text-slate-200 transition-colors py-1 px-2 rounded">
-              <Shield className="h-3.5 w-3.5" />
-              <span>Admin</span>
+            <Link href="/admin" className="text-slate-400 hover:text-white transition-colors py-1 px-2 rounded">
+              Admin
             </Link>
           </nav>
         </div>
 
         <div className="flex items-center space-x-3">
-          <div className="flex items-center space-x-2 bg-slate-800/90 border border-slate-700 px-3 py-1 rounded-full text-xs font-mono">
-            <Zap className="h-3.5 w-3.5 text-amber-400 fill-amber-400" />
-            <span className="text-slate-300">Credits: <strong className="text-white">{creditsRemaining}</strong></span>
+          <div className="flex items-center space-x-2 bg-slate-950 border border-slate-800 px-2.5 py-1 rounded text-xs font-mono">
+            <span className="text-slate-400">Credits: <strong className="text-white">{creditsRemaining}</strong></span>
             {!isPaid && (
-              <span className="text-emerald-400 bg-emerald-950/80 px-1.5 py-0.2 border border-emerald-800 rounded text-[10px]">
+              <span className="text-slate-400 bg-slate-800 px-1 py-0.2 border border-slate-700 rounded text-[9px] font-bold">
                 FREE
               </span>
             )}
           </div>
 
           <Link href="/create">
-            <Button size="sm" className="space-x-1.5 bg-indigo-600 hover:bg-indigo-500 text-white">
-              <PlusCircle className="h-4 w-4" />
-              <span className="hidden sm:inline">New Map</span>
+            <Button size="sm">
+              <span>New Map</span>
             </Button>
           </Link>
 
           {user ? (
             <div className="flex items-center space-x-2 border-l border-slate-800 pl-3">
-              <span className="text-xs text-slate-300 font-medium hidden md:inline truncate max-w-[120px]">
+              <span className="text-xs text-slate-300 font-mono hidden md:inline truncate max-w-[120px]">
                 {user.fullName || user.email.split('@')[0]}
               </span>
               <Button
@@ -97,7 +89,7 @@ export function Navbar({ creditsRemaining = 1, isPaid = false }: { creditsRemain
                 className="text-slate-400 hover:text-rose-400 px-2"
                 title="Sign out"
               >
-                <LogOut className="h-4 w-4" />
+                <LogOut className="h-3.5 w-3.5" />
               </Button>
             </div>
           ) : (
@@ -115,3 +107,4 @@ export function Navbar({ creditsRemaining = 1, isPaid = false }: { creditsRemain
     </header>
   );
 }
+

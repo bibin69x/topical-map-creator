@@ -59,37 +59,36 @@ export default function GeneratingPage({ params }: { params: { id: string } }) {
   }, [generationId, router]);
 
   return (
-    <div className="max-w-md mx-auto py-16 text-center space-y-6">
-      <div className="bg-slate-900 border border-slate-800 rounded-xl p-8 space-y-6">
+    <div className="max-w-md mx-auto py-12 text-center space-y-4">
+      <div className="bg-slate-900 border border-slate-800 rounded p-6 space-y-5">
         {status === 'FAILED' ? (
           <>
-            <AlertCircle className="h-12 w-12 text-rose-500 mx-auto" />
-            <h2 className="text-lg font-bold text-rose-300">Generation Failed</h2>
+            <AlertCircle className="h-10 w-10 text-rose-500 mx-auto" />
+            <h2 className="text-sm font-bold text-rose-300">Generation Failed</h2>
             <p className="text-xs text-slate-400">{error}</p>
           </>
         ) : (
           <>
-            <Loader2 className="h-10 w-10 text-indigo-400 animate-spin mx-auto" />
             <div>
-              <h2 className="text-lg font-bold text-slate-100">Generating Topical Authority Map</h2>
-              <p className="text-xs text-slate-400 mt-1">Executing 16-stage engine pipeline & validation suite...</p>
+              <h2 className="text-sm font-bold text-white uppercase font-mono tracking-wide">Building Topical Authority Map</h2>
+              <p className="text-xs text-slate-400 mt-1">Executing 16-stage taxonomy engine pipeline...</p>
             </div>
 
-            <div className="space-y-2 text-left pt-2 font-mono text-xs">
+            <div className="space-y-1.5 text-left pt-1 font-mono text-xs">
               {stages.map((stage, idx) => {
                 const isCurrent = idx === currentStageIdx;
                 const isPast = idx < currentStageIdx;
                 return (
-                  <div key={stage} className={`flex items-center space-x-3 p-2 rounded ${
-                    isCurrent ? 'bg-indigo-950/80 border border-indigo-800 text-indigo-300' :
+                  <div key={stage} className={`flex items-center space-x-2.5 p-2 rounded text-[11px] ${
+                    isCurrent ? 'bg-slate-950 border border-slate-700 text-white' :
                     isPast ? 'text-emerald-400' : 'text-slate-600'
                   }`}>
                     {isPast ? (
-                      <CheckCircle2 className="h-4 w-4 text-emerald-400 shrink-0" />
+                      <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400 shrink-0" />
                     ) : isCurrent ? (
-                      <Loader2 className="h-4 w-4 text-indigo-400 animate-spin shrink-0" />
+                      <Loader2 className="h-3.5 w-3.5 text-slate-300 animate-spin shrink-0" />
                     ) : (
-                      <div className="h-4 w-4 rounded-full border border-slate-700 shrink-0" />
+                      <div className="h-3.5 w-3.5 rounded-sm border border-slate-800 shrink-0" />
                     )}
                     <span>{stage}</span>
                   </div>
@@ -102,3 +101,4 @@ export default function GeneratingPage({ params }: { params: { id: string } }) {
     </div>
   );
 }
+

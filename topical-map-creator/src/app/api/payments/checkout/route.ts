@@ -36,7 +36,7 @@ export async function POST(req: Request) {
             notes: {
               plan: parsed.plan,
               credits: 10,
-              description: 'Topical Authority Creator — 10 Map Credits'
+              description: 'Topical Authority Creator : 10 Map Credits'
             }
           })
         });
