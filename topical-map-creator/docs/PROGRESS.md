@@ -268,6 +268,7 @@ Last Updated: 2026-09-01 09:18 IST
 | 2026-08-31 | Phase 15 Pre-Launch Smoke Testing & Beta Runbook | Built `docs/specs/18-beta-launch-runbook.md`, end-to-end user lifecycle smoke test (`smoke.test.ts`), fixed test typing | 30/30 tests passing, strict TypeScript & Next.js production build certified |
 | 2026-08-31 | Phase 16 Production Release & Cohort Onboarding | Created `supabase/seed.sql`, built `metrics.ts` customer milestones tracker, added `metrics.test.ts` | 36/36 tests passing, complete readiness for beta rollout |
 | 2026-09-01 | Phase 17 Pre-Flight Automated Validation & CLI Suite | Extracted `health.ts` diagnostic service, created `scripts/preflight.mjs` deployment validator, added TEST-16 suite | 38/38 tests passing, automated pre-flight integrity certified |
+| 2026-09-01 | Live Engine Output & Deep SEO Taxonomy Upgrade | Attached store to `globalThis`, removed mock Technical SEO fallback from `/projects/[id]`, upgraded prompt to generate 30+ publication-ready topics across 4-6 semantic clusters | Live generation active for any topic, zero demo data leakage |
 
 
 ---
