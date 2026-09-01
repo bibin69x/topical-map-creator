@@ -174,6 +174,14 @@ Last Updated: 2026-09-01 09:18 IST
 | BUILD-30 | Standalone Pre-Flight CLI Suite | 🟢 Complete | Agent | 2026-09-01 | 2026-09-01 | `scripts/preflight.mjs` verifying critical system files, env schemas, and `npm run preflight` script |
 | TEST-16 | Pre-Flight Automated Validation Suite | 🟢 Complete | Agent | 2026-09-01 | 2026-09-01 | `src/lib/services/preflight.test.ts` validating 12 architecture files & .env.example contract (38/38 tests passing) |
 
+## Phase 18 — Supabase PostgreSQL Persistence & Storage Suite
+
+| ID | Module / Task | Status | Owner | Started | Completed | Notes |
+|----|---------------|--------|-------|---------|-----------|-------|
+| BUILD-31 | Supabase Service Role Admin Client | 🟢 Complete | Agent | 2026-09-01 | 2026-09-01 | `src/lib/supabase/admin.ts` for privileged server-side database writes and entity upserts |
+| BUILD-32 | Database Persistence Service | 🟢 Complete | Agent | 2026-09-01 | 2026-09-01 | `src/lib/services/db.ts` persisting projects, generations, topic clusters, topics, and links to PostgreSQL |
+| TEST-17 | Database Persistence & Resilience Test Suite | 🟢 Complete | Agent | 2026-09-01 | 2026-09-01 | `src/lib/services/db.test.ts` validating persistence handler contracts and non-blocking fallbacks (40/40 tests passing) |
+
 ---
 
 ## Current Sprint
@@ -192,6 +200,7 @@ Last Updated: 2026-09-01 09:18 IST
 - [x] Phase 15 Pre-Launch Smoke Testing & Deployment Readiness Complete (DOC-19 Beta Runbook, 30/30 Vitest tests passing, tsc clean)
 - [x] Phase 16 Production Release & Cohort Onboarding Complete (Seed fixtures, Milestone tracker, 36/36 Vitest tests passing, deployment verified)
 - [x] Phase 17 Pre-Flight Automated Validation & Deployment Integrity Complete (`scripts/preflight.mjs`, `health.ts`, 38/38 Vitest tests passing)
+- [x] Phase 18 Supabase PostgreSQL Persistence & Storage Suite Complete (`admin.ts`, `db.ts`, 40/40 Vitest tests passing)
 - [x] **100% V1 Definition of Done Certified (§40)**
 
 ---
@@ -269,6 +278,7 @@ Last Updated: 2026-09-01 09:18 IST
 | 2026-08-31 | Phase 16 Production Release & Cohort Onboarding | Created `supabase/seed.sql`, built `metrics.ts` customer milestones tracker, added `metrics.test.ts` | 36/36 tests passing, complete readiness for beta rollout |
 | 2026-09-01 | Phase 17 Pre-Flight Automated Validation & CLI Suite | Extracted `health.ts` diagnostic service, created `scripts/preflight.mjs` deployment validator, added TEST-16 suite | 38/38 tests passing, automated pre-flight integrity certified |
 | 2026-09-01 | Live Engine Output & Deep SEO Taxonomy Upgrade | Attached store to `globalThis`, removed mock Technical SEO fallback from `/projects/[id]`, upgraded prompt to generate 30+ publication-ready topics across 4-6 semantic clusters | Live generation active for any topic, zero demo data leakage |
+| 2026-09-01 | Phase 18 Supabase PostgreSQL Persistence | Built `admin.ts` service-role client, `db.ts` database persistence service, and TEST-17 test suite | 40/40 tests passing, permanent entity storage in PostgreSQL |
 
 
 ---

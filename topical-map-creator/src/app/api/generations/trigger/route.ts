@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { TopicalAuthorityEngine } from '@/lib/engine/pipeline';
 import { activeGenerations } from '@/lib/engine/store';
+import { saveEngineResultToDb } from '@/lib/services/db';
 import { z } from 'zod';
 
 export const dynamic = 'force-dynamic';
@@ -57,6 +58,17 @@ export async function POST(req: Request) {
         result,
         error: null
       });
+
+      // Asynchronously persist to Supabase PostgreSQL without blocking
+      saveEngineResultToDb({
+        generationId,
+        projectId,
+        primaryTopic: parsed.primaryTopic,
+        websiteUrl: parsed.websiteUrl,
+        targetCountry: parsed.targetCountry,
+        language: parsed.language,
+        result
+      }).catch(dbErr => console.warn('[DB Persistence Async Exception]:', dbErr));
 
       return NextResponse.json({
         success: true,

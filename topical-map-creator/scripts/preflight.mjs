@@ -20,6 +20,8 @@ export function checkSystemFiles() {
     'supabase/migrations/20260831000000_initial_schema.sql',
     'supabase/seed.sql',
     'src/lib/engine/pipeline.ts',
+    'src/lib/supabase/admin.ts',
+    'src/lib/services/db.ts',
     'src/lib/services/account.ts',
     'src/lib/services/payment.ts',
     'src/lib/services/health.ts',
