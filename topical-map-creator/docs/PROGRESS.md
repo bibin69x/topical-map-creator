@@ -1,6 +1,6 @@
 # Topical Authority Creator — MVP Progress Tracker
 
-Last Updated: 2026-08-31 21:57 IST
+Last Updated: 2026-09-01 09:18 IST
 
 ---
 
@@ -166,6 +166,14 @@ Last Updated: 2026-08-31 21:57 IST
 | BUILD-28 | Customer Acquisition Milestones Tracker UI & API | 🟢 Complete | Agent | 2026-08-31 | 2026-08-31 | `calculateMilestones` service + interactive milestone progress bars in `/admin` fulfilling §33 & §34 |
 | TEST-15 | Milestones Progress & Budget Health Test Suite | 🟢 Complete | Agent | 2026-08-31 | 2026-08-31 | `src/lib/services/metrics.test.ts` unit tests for 20/100/1k/10k target progress & health (36/36 tests passing) |
 
+## Phase 17 — Pre-Flight Automated Validation & Deployment Integrity
+
+| ID | Module / Task | Status | Owner | Started | Completed | Notes |
+|----|---------------|--------|-------|---------|-----------|-------|
+| BUILD-29 | System Health Diagnostic Service | 🟢 Complete | Agent | 2026-09-01 | 2026-09-01 | `src/lib/services/health.ts` extracting shared health diagnosis logic across API & internal tasks |
+| BUILD-30 | Standalone Pre-Flight CLI Suite | 🟢 Complete | Agent | 2026-09-01 | 2026-09-01 | `scripts/preflight.mjs` verifying critical system files, env schemas, and `npm run preflight` script |
+| TEST-16 | Pre-Flight Automated Validation Suite | 🟢 Complete | Agent | 2026-09-01 | 2026-09-01 | `src/lib/services/preflight.test.ts` validating 12 architecture files & .env.example contract (38/38 tests passing) |
+
 ---
 
 ## Current Sprint
@@ -183,6 +191,7 @@ Last Updated: 2026-08-31 21:57 IST
 - [x] Phase 14 Beta Cohort Feedback Loop & Quality Reviews Complete (`/api/feedback`, `FeedbackWidget`, 29/29 Vitest tests passing)
 - [x] Phase 15 Pre-Launch Smoke Testing & Deployment Readiness Complete (DOC-19 Beta Runbook, 30/30 Vitest tests passing, tsc clean)
 - [x] Phase 16 Production Release & Cohort Onboarding Complete (Seed fixtures, Milestone tracker, 36/36 Vitest tests passing, deployment verified)
+- [x] Phase 17 Pre-Flight Automated Validation & Deployment Integrity Complete (`scripts/preflight.mjs`, `health.ts`, 38/38 Vitest tests passing)
 - [x] **100% V1 Definition of Done Certified (§40)**
 
 ---
@@ -258,6 +267,7 @@ Last Updated: 2026-08-31 21:57 IST
 | 2026-08-31 | Phase 14 Beta Cohort Feedback Loop & Quality Reviews | Built `POST /api/feedback`, `FeedbackWidget.tsx` in results view, 5th KPI card & reviews table in `/admin`, and 3 new unit tests | 29/29 tests passing, complete beta user feedback loop active |
 | 2026-08-31 | Phase 15 Pre-Launch Smoke Testing & Beta Runbook | Built `docs/specs/18-beta-launch-runbook.md`, end-to-end user lifecycle smoke test (`smoke.test.ts`), fixed test typing | 30/30 tests passing, strict TypeScript & Next.js production build certified |
 | 2026-08-31 | Phase 16 Production Release & Cohort Onboarding | Created `supabase/seed.sql`, built `metrics.ts` customer milestones tracker, added `metrics.test.ts` | 36/36 tests passing, complete readiness for beta rollout |
+| 2026-09-01 | Phase 17 Pre-Flight Automated Validation & CLI Suite | Extracted `health.ts` diagnostic service, created `scripts/preflight.mjs` deployment validator, added TEST-16 suite | 38/38 tests passing, automated pre-flight integrity certified |
 
 
 ---
