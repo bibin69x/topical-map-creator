@@ -37,9 +37,12 @@ export class TopicalAuthorityEngine {
       const candidateMatch = candidates.find(c => c.normalizedTitle === catTopic.title.toLowerCase().trim());
       const isPillar = catTopic.depthLevel === 1;
 
+      const searchVolume = catTopic.searchVolume || candidateMatch?.searchVolume || (isPillar ? 4800 : 1400);
+      const cpcInr = catTopic.cpcInr || candidateMatch?.cpcInr || (catTopic.intent === 'COMMERCIAL' || catTopic.intent === 'TRANSACTIONAL' ? 48 : 22);
+
       const { priorityScore, priority } = calculatePriorityScore({
-        searchVolume: candidateMatch?.searchVolume || 300,
-        cpcInr: candidateMatch?.cpcInr || 15,
+        searchVolume,
+        cpcInr,
         depthLevel: catTopic.depthLevel,
         isPillar,
         intent: catTopic.intent,
@@ -56,8 +59,8 @@ export class TopicalAuthorityEngine {
         priorityScore,
         parentTitle: catTopic.parentTitle,
         depthLevel: catTopic.depthLevel,
-        searchVolume: candidateMatch?.searchVolume || 300,
-        cpcInr: candidateMatch?.cpcInr || 15,
+        searchVolume,
+        cpcInr,
         confidenceScore: 88.0
       };
     });
@@ -82,17 +85,17 @@ export class TopicalAuthorityEngine {
           sourceTopicTitle: topic.title,
           targetTopicTitle: topic.parentTitle,
           relationshipType: 'PARENT_CHILD',
-          anchorTextSuggestion: `Learn more about ${topic.parentTitle}`
+          anchorTextSuggestion: `Comprehensive guide to ${topic.parentTitle}`
         });
       } else {
         // Link to cluster pillar if available
         const cluster = topicClusters.find(c => c.name === topic.clusterName);
-        if (cluster && cluster.pillarTopicTitle !== topic.title) {
+        if (cluster && cluster.pillarTopicTitle && cluster.pillarTopicTitle !== topic.title) {
           internalLinks.push({
             sourceTopicTitle: topic.title,
             targetTopicTitle: cluster.pillarTopicTitle,
             relationshipType: 'PILLAR_SUPPORTING',
-            anchorTextSuggestion: `Comprehensive guide on ${cluster.pillarTopicTitle}`
+            anchorTextSuggestion: `Explore our pillar on ${cluster.pillarTopicTitle}`
           });
         }
       }

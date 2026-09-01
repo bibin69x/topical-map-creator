@@ -39,31 +39,29 @@ export default function ResultsDashboardPage({ params }: { params: { id: string 
     );
   }
 
-  // Fallback demo result if accessed directly or refreshed
-  const displayResult: EngineResult = result || {
-    projectId: 'demo-proj',
-    primaryTopic: 'Technical SEO Strategy',
-    clusters: [
-      { id: 'c-1', name: 'Technical SEO Core & Strategy', description: 'Fundamental site architecture, crawlability, and indexing guidelines.', pillarTopicTitle: 'Technical SEO Audit', topicCount: 5 },
-      { id: 'c-2', name: 'Crawlability & Indexing Optimization', description: 'Robots.txt, XML sitemaps, canonical tags, and HTTP status codes.', pillarTopicTitle: 'Crawlability Optimization', topicCount: 5 },
-      { id: 'c-3', name: 'Page Speed & Core Web Vitals', description: 'LCP, CLS, INP optimization and performance budgets.', pillarTopicTitle: 'Core Web Vitals Guide', topicCount: 5 },
-    ],
-    topics: [
-      { id: 't-1', title: 'Technical SEO Audit Checklist', slug: 'technical-seo-audit-checklist', clusterName: 'Technical SEO Core & Strategy', intent: 'COMMERCIAL', priority: 'HIGH', priorityScore: 92.5, depthLevel: 1, searchVolume: 2400, cpcInr: 45, confidenceScore: 90 },
-      { id: 't-2', title: 'How to Fix Indexing Issues in Google Search Console', slug: 'fix-indexing-issues-gsc', clusterName: 'Crawlability & Indexing Optimization', intent: 'INFORMATIONAL', priority: 'HIGH', priorityScore: 88.0, parentTitle: 'Technical SEO Audit Checklist', depthLevel: 2, searchVolume: 1800, cpcInr: 25, confidenceScore: 90 },
-      { id: 't-3', title: 'Robots.txt Best Practices & Directives', slug: 'robots-txt-best-practices', clusterName: 'Crawlability & Indexing Optimization', intent: 'INFORMATIONAL', priority: 'MEDIUM', priorityScore: 65.0, parentTitle: 'Technical SEO Audit Checklist', depthLevel: 2, searchVolume: 1200, cpcInr: 15, confidenceScore: 85 },
-      { id: 't-4', title: 'Core Web Vitals Optimization Guide 2026', slug: 'core-web-vitals-optimization-guide', clusterName: 'Page Speed & Core Web Vitals', intent: 'COMMERCIAL', priority: 'HIGH', priorityScore: 85.0, depthLevel: 1, searchVolume: 1900, cpcInr: 35, confidenceScore: 90 },
-      { id: 't-5', title: 'Canonical Tag Implementation Mistakes', slug: 'canonical-tag-mistakes', clusterName: 'Crawlability & Indexing Optimization', intent: 'INFORMATIONAL', priority: 'MEDIUM', priorityScore: 58.0, parentTitle: 'Robots.txt Best Practices & Directives', depthLevel: 3, searchVolume: 800, cpcInr: 12, confidenceScore: 80 },
-    ],
-    internalLinks: [
-      { sourceTopicTitle: 'How to Fix Indexing Issues in Google Search Console', targetTopicTitle: 'Technical SEO Audit Checklist', relationshipType: 'PARENT_CHILD', anchorTextSuggestion: 'Learn more in our Technical SEO Audit' },
-      { sourceTopicTitle: 'Robots.txt Best Practices & Directives', targetTopicTitle: 'Technical SEO Audit Checklist', relationshipType: 'PARENT_CHILD', anchorTextSuggestion: 'Complete Technical SEO Audit' },
-    ],
-    qualityPassed: true,
-    qualityGateScore: 95,
-    totalSearchCostInr: 3.20,
-    totalAiCostInr: 0.187
-  };
+  if (!result) {
+    return (
+      <div className="max-w-md mx-auto py-16 text-center space-y-4">
+        <div className="bg-slate-900 border border-slate-800 rounded-xl p-8 space-y-4">
+          <Compass className="h-10 w-10 text-slate-600 mx-auto" />
+          <h2 className="text-lg font-bold text-slate-100">Topical Map Not Found</h2>
+          <p className="text-xs text-slate-400">
+            This generation session could not be located or may have expired.
+          </p>
+          <div className="pt-2">
+            <a
+              href="/create"
+              className="inline-flex items-center space-x-2 bg-indigo-600 hover:bg-indigo-500 text-white text-xs font-medium px-4 py-2 rounded-md transition-colors"
+            >
+              <span>Create New Topical Map</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  const displayResult = result;
 
   const tabs = [
     { id: 'overview', label: 'Overview', icon: LayoutDashboard },

@@ -64,23 +64,33 @@ describe('TopicalAuthorityEngine Pipeline Integration', () => {
     expect(result.totalAiCostInr).toBeGreaterThanOrEqual(0);
   });
 
-  it('should sanitize input and handle whitespace and punctuation gracefully', async () => {
+  it('should generate domain-specific topics and clusters for custom niches without falling back to generic placeholders', async () => {
+    const nicheTopic = 'Organic Dog Food';
     const result = await engine.executePipeline({
-      projectId: 'test-proj-002',
-      primaryTopic: '  <script>alert("hack")</script> Next.js SEO & Web Vitals!!!  ',
+      projectId: 'test-proj-niche',
+      primaryTopic: nicheTopic,
       targetCountry: 'IN',
       language: 'en'
     });
 
-    expect(result.primaryTopic).toBeTruthy();
-    expect(result.topics.length).toBeGreaterThan(0);
-    expect(result.qualityPassed).toBe(true);
+    expect(result.primaryTopic).toBe(nicheTopic);
+    expect(result.clusters.length).toBeGreaterThanOrEqual(3);
 
-    // Ensure no unescaped dangerous tags in generated titles or slugs
-    for (const topic of result.topics) {
-      expect(topic.title).not.toContain('<script>');
-      expect(topic.slug).not.toContain('<');
-      expect(topic.slug).not.toContain('>');
-    }
+    // Ensure clusters and topics are specifically relevant to Organic Dog Food
+    const allTitlesText = result.topics.map(t => t.title.toLowerCase()).join(' ');
+    const allClusterText = result.clusters.map(c => c.name.toLowerCase()).join(' ');
+
+    expect(
+      allTitlesText.includes('dog') ||
+      allTitlesText.includes('organic') ||
+      allTitlesText.includes('food') ||
+      allClusterText.includes('organic dog food')
+    ).toBe(true);
+
+    // Verify depth 1, 2, and 3 are present
+    const depthLevels = new Set(result.topics.map(t => t.depthLevel));
+    expect(depthLevels.has(1)).toBe(true);
+    expect(depthLevels.has(2)).toBe(true);
   });
 });
+

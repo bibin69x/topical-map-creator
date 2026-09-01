@@ -18,26 +18,11 @@ export async function POST(req: Request) {
     const body = await req.json();
     const parsed = triggerSchema.parse(body);
 
-    // Check concurrency lock: reject if a job is already processing (§DOC-14 & §DOC-06)
-    const hasActiveJob = Array.from(activeGenerations.values()).some(
-      g => g.status === 'PROCESSING' && Date.now() - parseInt(g.id.replace('gen-', '')) < 60000
-    );
-    if (hasActiveJob) {
-      return NextResponse.json(
-        {
-          success: false,
-          error: 'CONCURRENT_GENERATION_LIMIT: You already have an active topical generation in progress.'
-        },
-        { status: 409 }
-      );
-    }
-
     const generationId = `gen-${Date.now()}`;
     const projectId = `proj-${Date.now()}`;
-
     const createdAt = new Date().toISOString().split('T')[0];
 
-    // Initialize queued job
+    // Initialize queued job in persistent store
     activeGenerations.set(generationId, {
       id: generationId,
       projectId,
@@ -50,15 +35,17 @@ export async function POST(req: Request) {
       error: null
     });
 
-    // Execute engine pipeline asynchronously
-    const engine = new TopicalAuthorityEngine();
-    engine.executePipeline({
-      projectId,
-      primaryTopic: parsed.primaryTopic,
-      websiteUrl: parsed.websiteUrl,
-      targetCountry: parsed.targetCountry,
-      language: parsed.language
-    }).then(result => {
+    // Execute engine pipeline
+    try {
+      const engine = new TopicalAuthorityEngine();
+      const result = await engine.executePipeline({
+        projectId,
+        primaryTopic: parsed.primaryTopic,
+        websiteUrl: parsed.websiteUrl,
+        targetCountry: parsed.targetCountry,
+        language: parsed.language
+      });
+
       activeGenerations.set(generationId, {
         id: generationId,
         projectId,
@@ -70,7 +57,15 @@ export async function POST(req: Request) {
         result,
         error: null
       });
-    }).catch(err => {
+
+      return NextResponse.json({
+        success: true,
+        generationId,
+        projectId,
+        status: 'COMPLETED'
+      });
+    } catch (pipelineErr: any) {
+      console.error('[TopicalEngine Pipeline Error]:', pipelineErr);
       activeGenerations.set(generationId, {
         id: generationId,
         projectId,
@@ -80,16 +75,14 @@ export async function POST(req: Request) {
         createdAt,
         progressStage: 'FAILED',
         result: null,
-        error: err.message || 'Generation failed'
+        error: pipelineErr.message || 'Engine generation failed'
       });
-    });
 
-    return NextResponse.json({
-      success: true,
-      generationId,
-      projectId,
-      status: 'PROCESSING'
-    });
+      return NextResponse.json(
+        { success: false, error: pipelineErr.message || 'Pipeline execution failed', generationId },
+        { status: 500 }
+      );
+    }
   } catch (err: any) {
     return NextResponse.json(
       { success: false, error: err.message || 'Invalid request parameters' },

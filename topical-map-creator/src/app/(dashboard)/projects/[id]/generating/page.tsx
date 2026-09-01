@@ -27,11 +27,6 @@ export default function GeneratingPage({ params }: { params: { id: string } }) {
       setCurrentStageIdx(prev => (prev < stages.length - 1 ? prev + 1 : prev));
     }, 800);
 
-    // Automatic fallback redirect after animation completes (for serverless environments)
-    const fallbackTimeout = setTimeout(() => {
-      router.push(`/projects/${generationId}`);
-    }, 5500);
-
     // Poll status from backend
     const pollInterval = setInterval(async () => {
       try {
@@ -41,12 +36,13 @@ export default function GeneratingPage({ params }: { params: { id: string } }) {
           if (json.data.status === 'COMPLETED') {
             clearInterval(pollInterval);
             clearInterval(stageInterval);
-            clearTimeout(fallbackTimeout);
-            router.push(`/projects/${generationId}`);
+            setCurrentStageIdx(stages.length - 1);
+            setTimeout(() => {
+              router.push(`/projects/${generationId}`);
+            }, 600);
           } else if (json.data.status === 'FAILED') {
             clearInterval(pollInterval);
             clearInterval(stageInterval);
-            clearTimeout(fallbackTimeout);
             setStatus('FAILED');
             setError(json.data.error || 'Pipeline execution failed.');
           }
@@ -54,12 +50,11 @@ export default function GeneratingPage({ params }: { params: { id: string } }) {
       } catch (err) {
         console.error('Polling error:', err);
       }
-    }, 1200);
+    }, 800);
 
     return () => {
       clearInterval(stageInterval);
       clearInterval(pollInterval);
-      clearTimeout(fallbackTimeout);
     };
   }, [generationId, router]);
 
